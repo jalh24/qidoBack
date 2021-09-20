@@ -33,6 +33,21 @@ class CatalogoModel extends Model
     return $query->getResult();
   } 
 
+  public function getCalificacion() { 
+    $query = $this->db->query('select * from calificacion');
+    return $query->getResult();
+  } 
+
+  public function getTiposTelefono() { 
+    $query = $this->db->query('select * from tipotelefono');
+    return $query->getResult();
+  }
+
+  public function getPermanencias() { 
+    $query = $this->db->query('select * from permanencia');
+    return $query->getResult();
+  } 
+
   public function getEstadoCivil() { 
     $query = $this->db->query('select * from estadocivilcat');
     return $query->getResult();
