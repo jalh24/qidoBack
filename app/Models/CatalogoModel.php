@@ -33,6 +33,11 @@ class CatalogoModel extends Model
     return $query->getResult();
   } 
 
+  public function getBanco() { 
+    $query = $this->db->query('select * from banco');
+    return $query->getResult();
+  } 
+
   public function getCalificacion() { 
     $query = $this->db->query('select * from calificacion');
     return $query->getResult();

@@ -78,6 +78,13 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function bancos()
+	{
+		$catalogoModel = new CatalogoModel();	
+		$resp["data"]=$catalogoModel->getBanco();
+		return $this->respond($resp);
+	}
+
 	public function comboEstadosCiviles()
 	{
 		$catalogoModel = new CatalogoModel();	
