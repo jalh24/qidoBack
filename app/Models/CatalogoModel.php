@@ -18,6 +18,16 @@ class CatalogoModel extends Model
     return $query->getResult();
   } 
 
+  public function getEspecialidades() { 
+    $query = $this->db->query('select * from especialidad');
+    return $query->getResult();
+  } 
+
+  public function getHabilidades() { 
+    $query = $this->db->query('select * from habilidad');
+    return $query->getResult();
+  } 
+
   public function getSexo() { 
     $query = $this->db->query('select * from sexocat');
     return $query->getResult();

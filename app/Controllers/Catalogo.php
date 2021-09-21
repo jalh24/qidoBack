@@ -17,6 +17,20 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function especialidades()
+	{
+		$catalogoModel = new CatalogoModel();	
+        $resp["data"]=$catalogoModel->getEspecialidades();
+		return $this->respond($resp);
+	}
+
+	public function habilidades()
+	{
+		$catalogoModel = new CatalogoModel();	
+        $resp["data"]=$catalogoModel->getHabilidades();
+		return $this->respond($resp);
+	}
+
 	public function paises()
 	{
 		$catalogoModel = new CatalogoModel();	
