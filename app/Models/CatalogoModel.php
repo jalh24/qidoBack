@@ -43,6 +43,11 @@ class CatalogoModel extends Model
     return $query->getResult();
   } 
 
+  public function getTipoColaborador() { 
+    $query = $this->db->query('select * from tipocolaborador');
+    return $query->getResult();
+  } 
+
   public function getTiposTelefono() { 
     $query = $this->db->query('select * from tipotelefono');
     return $query->getResult();

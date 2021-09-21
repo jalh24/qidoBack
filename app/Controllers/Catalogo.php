@@ -106,6 +106,13 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function tiposColaboradores()
+	{	
+		$catalogoModel = new CatalogoModel();	
+		$resp["data"]=$catalogoModel->getTipoColaborador();
+		return $this->respond($resp);
+	}
+
 	public function tiposTelefono()
 	{	
 		$catalogoModel = new CatalogoModel();	
