@@ -2,9 +2,9 @@
 
 use CodeIgniter\Model;
 
-class ColaboradorModel extends Model
+class CuentaColaboradorModel extends Model
 {
-  protected $table = 'colaborador';
+  protected $table = 'cuentacolaborador';
   protected $db;
 
   public function __construct()
@@ -14,7 +14,7 @@ class ColaboradorModel extends Model
       // OR $this->db = db_connect();
   }
 
-public function insert_data($data = array())
+  public function insert_data($data = array())
   {
       $this->db->table($this->table)->insert($data);
       return $this->db->insertID();
@@ -23,7 +23,7 @@ public function insert_data($data = array())
   public function update_data($id, $data = array())
   {
       $this->db->table($this->table)->update($data, array(
-          "idColaborador" => $id,
+          "idCuenta" => $id,
       ));
       return $this->db->affectedRows();
   }
@@ -31,12 +31,12 @@ public function insert_data($data = array())
   public function delete_data($id)
   {
       return $this->db->table($this->table)->delete(array(
-          "idColaborador" => $id,
+          "idCuenta" => $id,
       ));
   }
 
-  public function getColaboradores() { 
-    $query = $this->db->query('select * from ' . $this->table);
+  public function getContactosColaborador($idColaborador) { 
+    $query = $this->db->query('select * from ' . $this->table . ' where idColaborador ='.$idColaborador);
     return $query->getResult();
   } 
 

@@ -2,6 +2,10 @@
 
 namespace App\Controllers;
 use App\Models\ColaboradorModel;
+use App\Models\ContactoColaboradorModel;
+use App\Models\CuentaColaboradorModel;
+use App\Models\ExperienciaModel;
+use App\Models\EstudioModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
@@ -22,58 +26,124 @@ class Colaborador extends BaseController
 	// create
     public function create() {
         $colaboradorModel = new ColaboradorModel();
-
-          $data = [
-            'nombre'  => $this->request->getVar('nombre'),
-            'a_paterno'  => $this->request->getVar('a_paterno'),
-            'a_materno'  => $this->request->getVar('a_materno'),
-            'correoElectronico'  => $this->request->getVar('correo_electronico'),
-            'foto'  => $this->request->getVar('foto'),
-            'rfc' => $this->request->getVar('rfc'),
-            'nss'  => $this->request->getVar('nss'),
-            'fecha_nacimiento'  => $this->request->getVar('fecha_nacimiento'),
-            'idSexo'  => $this->request->getVar('idSexo'),
-            'peso'  => $this->request->getVar('peso'),
-            'estatura'  => $this->request->getVar('estatura'),
-            'idZonaLaboral'  => $this->request->getVar('idZonaLaboral'),
-            'idEstadoCivil'  => $this->request->getVar('idEstadoCivil'),
-            'idTez'  => $this->request->getVar('idTez'),
-            'sgmm'  => $this->request->getVar('sgmm'),
-            'atiendeCovid'  => $this->request->getVar('atiendeCovid'),
-            'antecedentePenales'  => $this->request->getVar('antecedentePenales'),
-            'autoPropio'  => $this->request->getVar('autoPropio'),
-            'dispuestoViajar'  => $this->request->getVar('dispuestoViajar'),
-            'visa'  => $this->request->getVar('visa'),
-            'visaNumero'  => $this->request->getVar('visaNumero'),
-            'tipoVisa'  => $this->request->getVar('tipoVisa'),
-            'expiracionVisa'  => $this->request->getVar('expiracionVisa'),
-            'visaImagen'  => $this->request->getVar('visaImagen'),
-            'pasaporte'  => $this->request->getVar('pasaporte'),
-            'pasaporteNumero'  => $this->request->getVar('pasaporteNumero'),
-            'expiracionPasaporte'  => $this->request->getVar('expiracionPasaporte'),
-            'pasaporteImagen'  => $this->request->getVar('pasaporteImagen'),
-            'ine1'  => $this->request->getVar('ine1'),
-            'ine2'  => $this->request->getVar('ine2'),
-            'idEstatus'  => $this->request->getVar('idEstatus'),
-            'calle1'  => $this->request->getVar('calle1'),
-            'calle2'  => $this->request->getVar('calle2'),
-            'codigoPostal'  => $this->request->getVar('codigoPostal'),
-            'idPais'  => $this->request->getVar('idPais'),
-            'idEstado'  => $this->request->getVar('idEstado'),
-            'idCiudad'  => $this->request->getVar('idCiudad'),
-            'idColonia'  => $this->request->getVar('idColonia'),
-            'noExt'  => $this->request->getVar('noExt'),
-            'noInt'  => $this->request->getVar('noInt'),
-            'horario'  => json_encode($this->request->getVar('horario'), JSON_FORCE_OBJECT)
+        $json = file_get_contents('php://input');
+        $dataColaborador = json_decode($json);
+        $data = [
+            'nombre'  => $dataColaborador->nombre,
+            'a_paterno'  => $dataColaborador->a_paterno,
+            'a_materno'  => $dataColaborador->a_materno,
+            'correoElectronico'  => $dataColaborador->correo_electronico,
+            'foto'  => $dataColaborador->foto,
+            'rfc' => $dataColaborador->rfc,
+            'nss'  => $dataColaborador->nss,
+            'fecha_nacimiento'  => $dataColaborador->fecha_nacimiento,
+            'idSexo'  => $dataColaborador->idSexo,
+            'peso'  => $dataColaborador->peso,
+            'estatura'  => $dataColaborador->estatura,
+            'idZonaLaboral'  => $dataColaborador->idZonaLaboral,
+            'idEstadoCivil'  => $dataColaborador->idEstadoCivil,
+            'idTez'  => $dataColaborador->idTez,
+            'sgmm'  => $dataColaborador->sgmm,
+            'atiendeCovid'  => $dataColaborador->atiendeCovid,
+            'antecedentePenales'  => $dataColaborador->antecedentePenales,
+            'autoPropio'  => $dataColaborador->autoPropio,
+            'dispuestoViajar'  => $dataColaborador->dispuestoViajar,
+            'visa'  => $dataColaborador->visa,
+            'visaNumero'  => $dataColaborador->visaNumero,
+            'tipoVisa'  => $dataColaborador->tipoVisa,
+            'expiracionVisa'  => $dataColaborador->expiracionVisa,
+            'visaImagen'  => $dataColaborador->visaImagen,
+            'pasaporte'  => $dataColaborador->pasaporte,
+            'pasaporteNumero'  => $dataColaborador->pasaporteNumero,
+            'expiracionPasaporte'  => $dataColaborador->expiracionPasaporte,
+            'pasaporteImagen'  => $dataColaborador->pasaporteImagen,
+            'ine1'  => $dataColaborador->ine1,
+            'ine2'  => $dataColaborador->ine2,
+            'idEstatus'  => $dataColaborador->idEstatus,
+            'calle1'  => $dataColaborador->calle1,
+            'calle2'  => $dataColaborador->calle2,
+            'codigoPostal'  => $dataColaborador->codigoPostal,
+            'idPais'  => $dataColaborador->idPais,
+            'idEstado'  => $dataColaborador->idEstado,
+            'idCiudad'  => $dataColaborador->idCiudad,
+            'idColonia'  => $dataColaborador->idColonia,
+            'noExt'  => $dataColaborador->noExt,
+            'noInt'  => $dataColaborador->noInt,
+            'horario'  => json_encode($dataColaborador->horario)
         ];
-        var_dump($data);
+
+        //Se crea el colaborador y regresa el id para sus relaciones
         $colaborador= $colaboradorModel->insert_data($data);
+
+        // Se guardan los contactos del colaborador
+        $contactoColaboradorModel = new ContactoColaboradorModel();
+        $contactosColaboradorList = $dataColaborador->contactosColaborador;
+
+        foreach($contactosColaboradorList as $contacto1){            
+            $contacto = [
+                'idColaborador'=>$colaborador,
+                'nombre'  => $contacto1->nombre,
+                'correoElectronico'  => $contacto1->correoElectronico,
+                'telefono'  => $contacto1->telefono,
+                'idParentesco' =>$contacto1->idParentesco
+            ];
+            
+            $contactoColaboradorModel->insert_data($contacto);
+        }
+
+        // Se guardan las cuentas del colaborador
+        $cuentaColaboradorModel = new CuentaColaboradorModel();
+        $cuentasColaboradorList = $dataColaborador->cuentasColaborador;
+
+        foreach($cuentasColaboradorList as $cuenta1){            
+            $cuenta = [
+                'idColaborador'=>$colaborador,
+                'idBanco'  => $cuenta1->idBanco,
+                'tarjeta'  => $cuenta1->tarjeta,
+                'clabe'  => $cuenta1->clabe
+            ];
+            $cuentaColaboradorModel->insert_data($cuenta);
+        }
+
+        // Se guardan las experiencias del colaborador
+        $experienciaModel = new ExperienciaModel();
+        $experienciasList = $dataColaborador->experiencias;
+
+        foreach($experienciasList as $experiencia1){            
+            $experiencia = [
+                'idColaborador'=>$colaborador,
+                'empresa'  => $experiencia1->empresa,
+                'fechaInicio'  => date('Y-m-d',strtotime($experiencia1->fechaInicio)),
+                'fechaFin'  => date('Y-m-d',strtotime($experiencia1->fechaFin)),
+                'referencia'  => $experiencia1->referencia,
+                'comentario'  => $experiencia1->comentario,
+                'telefono'  => $experiencia1->telefono
+            ];
+            $experienciaModel->insert_data($experiencia);
+        }
+
+        // Se guardan los estudios del colaborador
+        $estudioModel = new EstudioModel();
+        $estudiosList = $dataColaborador->estudios;
+
+        foreach($estudiosList as $estudio1){            
+            $estudio = [
+                'idColaborador'=>$colaborador,
+                'institucion'  => $estudio1->institucion,
+                'fechaInicio'  => date('Y-m-d',strtotime($estudio1->fechaInicio)),
+                'fechaFin'  => date('Y-m-d',strtotime($estudio1->fechaFin)),
+                'cedula'  => $estudio1->cedula,
+                'comentarios'  => $estudio1->comentarios,
+                'idEstatus'  => $estudio1->idEstatus
+            ];
+            $estudioModel->insert_data($estudio);
+        }
 
         $response = [
           'status'   => 201,
           'error'    => null,
           'messages' => [
-              'success' => 'Employee created successfully'
+              'success' => 'Colaborador creado exitosamente'
           ]
       ];
       return $this->respondCreated($response);
