@@ -32,7 +32,7 @@ class Colaborador extends BaseController
             'nombre'  => $dataColaborador->nombre,
             'a_paterno'  => $dataColaborador->a_paterno,
             'a_materno'  => $dataColaborador->a_materno,
-            'correoElectronico'  => $dataColaborador->correo_electronico,
+            'correoElectronico'  => $dataColaborador->correoElectronico,
             'foto'  => $dataColaborador->foto,
             'rfc' => $dataColaborador->rfc,
             'nss'  => $dataColaborador->nss,
