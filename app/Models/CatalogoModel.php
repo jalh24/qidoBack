@@ -107,7 +107,7 @@ class CatalogoModel extends Model
   }
 
   public function getEstatus($tipo) { 
-    $query = $this->db->query('select * from estatus where tipo='.$tipo);
+    $query = $this->db->query('select * from estatus where tipo=\''.$tipo.'\'');
     return $query->getResult();
   }
 

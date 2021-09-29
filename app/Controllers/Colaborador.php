@@ -6,6 +6,7 @@ use App\Models\ContactoColaboradorModel;
 use App\Models\CuentaColaboradorModel;
 use App\Models\ExperienciaModel;
 use App\Models\EstudioModel;
+use App\Models\ZonaModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
@@ -32,15 +33,20 @@ class Colaborador extends BaseController
             'nombre'  => $dataColaborador->nombre,
             'a_paterno'  => $dataColaborador->a_paterno,
             'a_materno'  => $dataColaborador->a_materno,
-            'correoElectronico'  => $dataColaborador->correo_electronico,
+            'correoElectronico'  => $dataColaborador->correoElectronico,
             'foto'  => $dataColaborador->foto,
+            'fotoNombre'=> $dataColaborador->fotoNombre,
             'rfc' => $dataColaborador->rfc,
             'nss'  => $dataColaborador->nss,
             'fecha_nacimiento'  => $dataColaborador->fecha_nacimiento,
+            'idPaisNacimiento'  => $dataColaborador->idPaisNacimiento,
+            'idEstadoNacimiento'  => $dataColaborador->idEstadoNacimiento,
+            'idCiudadNacimiento'  => $dataColaborador->idCiudadNacimiento,
+            'comprobanteDomicilio'  => $dataColaborador->comprobanteDomicilio,
+            'comprobanteNombre'  => $dataColaborador->comprobanteNombre,
             'idSexo'  => $dataColaborador->idSexo,
             'peso'  => $dataColaborador->peso,
             'estatura'  => $dataColaborador->estatura,
-            'idZonaLaboral'  => $dataColaborador->idZonaLaboral,
             'idEstadoCivil'  => $dataColaborador->idEstadoCivil,
             'idTez'  => $dataColaborador->idTez,
             'sgmm'  => $dataColaborador->sgmm,
@@ -53,12 +59,16 @@ class Colaborador extends BaseController
             'tipoVisa'  => $dataColaborador->tipoVisa,
             'expiracionVisa'  => $dataColaborador->expiracionVisa,
             'visaImagen'  => $dataColaborador->visaImagen,
+            'visaNombre'  => $dataColaborador->visaNombre,
             'pasaporte'  => $dataColaborador->pasaporte,
             'pasaporteNumero'  => $dataColaborador->pasaporteNumero,
             'expiracionPasaporte'  => $dataColaborador->expiracionPasaporte,
             'pasaporteImagen'  => $dataColaborador->pasaporteImagen,
+            'pasaporteNombre'  => $dataColaborador->pasaporteNombre,
             'ine1'  => $dataColaborador->ine1,
             'ine2'  => $dataColaborador->ine2,
+            'ine1Nombre'  => $dataColaborador->ine1Nombre,
+            'ine2Nombre'  => $dataColaborador->ine2Nombre,
             'idEstatus'  => $dataColaborador->idEstatus,
             'calle1'  => $dataColaborador->calle1,
             'calle2'  => $dataColaborador->calle2,
@@ -69,7 +79,8 @@ class Colaborador extends BaseController
             'idColonia'  => $dataColaborador->idColonia,
             'noExt'  => $dataColaborador->noExt,
             'noInt'  => $dataColaborador->noInt,
-            'horario'  => json_encode($dataColaborador->horario)
+            'horario'  => json_encode($dataColaborador->horario),
+            'fechaCreacion' =>date('Y-m-d H:m:s')
         ];
 
         //Se crea el colaborador y regresa el id para sus relaciones
@@ -98,9 +109,9 @@ class Colaborador extends BaseController
         foreach($cuentasColaboradorList as $cuenta1){            
             $cuenta = [
                 'idColaborador'=>$colaborador,
-                'idBanco'  => $cuenta1->idBanco,
-                'tarjeta'  => $cuenta1->tarjeta,
-                'clabe'  => $cuenta1->clabe
+                'idBanco'  => $cuenta1->banco->idBanco,
+                'numero'  => $cuenta1->numero,
+                'tipoCuenta' => $cuenta1->tipoCuenta
             ];
             $cuentaColaboradorModel->insert_data($cuenta);
         }
@@ -117,7 +128,9 @@ class Colaborador extends BaseController
                 'fechaFin'  => date('Y-m-d',strtotime($experiencia1->fechaFin)),
                 'referencia'  => $experiencia1->referencia,
                 'comentario'  => $experiencia1->comentario,
-                'telefono'  => $experiencia1->telefono
+                'telefono'  => $experiencia1->telefono,
+                'habilidades'  => json_encode($experiencia1->habilidades),
+                'especialidades'  => json_encode($experiencia1->especialidades)
             ];
             $experienciaModel->insert_data($experiencia);
         }
@@ -134,9 +147,21 @@ class Colaborador extends BaseController
                 'fechaFin'  => date('Y-m-d',strtotime($estudio1->fechaFin)),
                 'cedula'  => $estudio1->cedula,
                 'comentarios'  => $estudio1->comentarios,
-                'idEstatus'  => $estudio1->idEstatus
+                'idEstatus'  => intval($estudio1->estatus->idEstatus)
             ];
             $estudioModel->insert_data($estudio);
+        }
+
+        // Se guardan las Zonas del colaborador
+        $zonaModel = new ZonaModel();
+        $zonasList = $dataColaborador->zonas;
+
+        foreach($zonasList as $zona1){            
+            $zona = [
+                'idColaborador'=>$colaborador,
+                'idZonaLaboral'  => $zona1->idZonaLaboral
+            ];
+            $zonaModel->insert_data($zona);
         }
 
         $response = [
