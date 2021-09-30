@@ -80,6 +80,8 @@ class Colaborador extends BaseController
             'noExt'  => $dataColaborador->noExt,
             'noInt'  => $dataColaborador->noInt,
             'horario'  => json_encode($dataColaborador->horario),
+            'habilidades'  => json_encode($dataColaborador->habilidades),
+            'especialidades'  => json_encode($dataColaborador->especialidades),
             'fechaCreacion' =>date('Y-m-d H:m:s')
         ];
 
@@ -128,9 +130,7 @@ class Colaborador extends BaseController
                 'fechaFin'  => date('Y-m-d',strtotime($experiencia1->fechaFin)),
                 'referencia'  => $experiencia1->referencia,
                 'comentario'  => $experiencia1->comentario,
-                'telefono'  => $experiencia1->telefono,
-                'habilidades'  => json_encode($experiencia1->habilidades),
-                'especialidades'  => json_encode($experiencia1->especialidades)
+                'telefono'  => $experiencia1->telefono
             ];
             $experienciaModel->insert_data($experiencia);
         }
