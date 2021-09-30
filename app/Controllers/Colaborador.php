@@ -16,8 +16,10 @@ class Colaborador extends BaseController
 
 	public function index()
 	{
+        $json = file_get_contents('php://input');
+        $dataColaborador = json_decode($json);
 		$colaboradorModel = new ColaboradorModel();
-		$colaboradores = $colaboradorModel->getColaboradores();
+		$colaboradores = $colaboradorModel->getColaboradores($dataColaborador);
 		
 		//return view('welcome_message',$colaboradores);
         $resp["data"]=$colaboradores;
@@ -69,6 +71,7 @@ class Colaborador extends BaseController
             'ine2'  => $dataColaborador->ine2,
             'ine1Nombre'  => $dataColaborador->ine1Nombre,
             'ine2Nombre'  => $dataColaborador->ine2Nombre,
+            'idPermancia'  => $dataColaborador->idPermancia,
             'idEstatus'  => $dataColaborador->idEstatus,
             'calle1'  => $dataColaborador->calle1,
             'calle2'  => $dataColaborador->calle2,
