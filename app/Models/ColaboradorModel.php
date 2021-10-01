@@ -75,28 +75,28 @@ public function insert_data($data = array())
 
   public function getColaboradoresNums($colaboradorFiltro) { 
     $filter = ' where idColaborador > 0 ';
-    if($colaboradorFiltro->genero >0){
+    if(!empty($colaboradorFiltro->genero)){
       $filter = $filter . ' and idSexo= ' . $colaboradorFiltro->genero;
     }
-    if($colaboradorFiltro->permanencia >0){
+    if(!empty($colaboradorFiltro->permanencia)){
       $filter = $filter . ' and idPermanencia= ' . $colaboradorFiltro->permanencia;
     }
-    if($colaboradorFiltro->atiendeCovid){
+    if(!empty($colaboradorFiltro->atiendeCovid)){
       $filter = $filter . ' and atiendeCovid= ' . $colaboradorFiltro->atiendeCovid;
     }
-    if($colaboradorFiltro->antecedentePenales){
+    if(!empty($colaboradorFiltro->antecedentePenales)){
       $filter = $filter . ' and antecedentePenales= ' . $colaboradorFiltro->antecedentePenales;
     }
-    if($colaboradorFiltro->autoPropio){
+    if(!empty($colaboradorFiltro->autoPropio)){
       $filter = $filter . ' and autoPropio= ' . $colaboradorFiltro->autoPropio;
     }
-    if($colaboradorFiltro->dispuestoViajar){
+    if(!empty($colaboradorFiltro->dispuestoViajar)){
       $filter = $filter . ' and dispuestoViajar= ' . $colaboradorFiltro->dispuestoViajar;
     }
-    if($colaboradorFiltro->peso1 >0 && $colaboradorFiltro->peso2 >0){
+    if(!empty($colaboradorFiltro->peso1) && !empty($colaboradorFiltro->peso2)){
       $filter = $filter . ' and (peso between ' . $colaboradorFiltro->peso1 . ' and ' . $colaboradorFiltro->peso2 .' ) ';
     }
-    if($colaboradorFiltro->estatura1 >0 && $colaboradorFiltro->estatura2 >0){
+    if(!empty($colaboradorFiltro->estatura1) && !empty($colaboradorFiltro->estatura2)){
       $filter = $filter . ' and (estatura between ' . $colaboradorFiltro->estatura1 . ' and ' . $colaboradorFiltro->estatura2 .' ) ';
     }
     /*var_dump('select * from ' . $this->table .
