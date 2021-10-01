@@ -23,6 +23,7 @@ class Colaborador extends BaseController
 		
 		//return view('welcome_message',$colaboradores);
         $resp["data"]=$colaboradores;
+        $resp["count"] =$colaboradorModel->getColaboradoresNums($dataColaborador)[0];
 		return $this->respond($resp);
 	}
 
@@ -71,7 +72,7 @@ class Colaborador extends BaseController
             'ine2'  => $dataColaborador->ine2,
             'ine1Nombre'  => $dataColaborador->ine1Nombre,
             'ine2Nombre'  => $dataColaborador->ine2Nombre,
-            'idPermancia'  => $dataColaborador->idPermancia,
+            'idPermanencia'  => $dataColaborador->idPermanencia,
             'idEstatus'  => $dataColaborador->idEstatus,
             'calle1'  => $dataColaborador->calle1,
             'calle2'  => $dataColaborador->calle2,
