@@ -306,4 +306,11 @@ class Colaborador extends BaseController
         
     }
 
+    // colaboradorId
+    public function colaboradorId(){
+        $colaboradorModel = new ColaboradorModel();
+        $id = $this->request->getVar('idColaborador');
+                    $resp["data"]=$colaboradorModel->getColaboradorId($id);
+                    return $this->respond($resp);        
+    }
 }

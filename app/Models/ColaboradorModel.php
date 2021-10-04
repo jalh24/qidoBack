@@ -143,6 +143,14 @@ public function insert_data($data = array())
     $query = $this->db->query('select count(DISTINCT colab.idColaborador) total from ' . $this->table . ' colab '.
                               $filter );
     return $query->getResult();
+  }
+  
+  public function getColaboradorId($colaboradorFiltro) { 
+    $filter = ' inner join colaboradorzona colabzona on colab.idColaborador = colabzona.idColaborador where colab.idColaborador =  '. $colaboradorFiltro;
+
+    $query = $this->db->query('select DISTINCT colab.* from ' . $this->table . ' colab '.
+                              $filter);
+    return $query->getResult();
   } 
 
 }
