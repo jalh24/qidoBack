@@ -21,7 +21,47 @@ class Colaborador extends BaseController
 		$colaboradorModel = new ColaboradorModel();
 		$colaboradores = $colaboradorModel->getColaboradores($dataColaborador);
 		
-		//return view('welcome_message',$colaboradores);
+		if(!empty($dataColaborador->habilidades)){
+            $colabs=[];
+            $x=0;
+            foreach($colaboradores as $colaborador) { 
+                $filtroFind = false;                
+                foreach(json_decode($colaborador->habilidades) as $habilidad) { 
+                    foreach($dataColaborador->habilidades as $habilidadFiltro) { 
+                        if($habilidadFiltro->nombre == $habilidad->nombre){
+                            $filtroFind = true;
+                        }
+                    }
+                    
+                }
+                if($filtroFind){
+                    $colabs[$x]=$colaborador;
+                    $x++;
+                }
+            }
+            $colaboradores =$colabs;    
+        }
+        /*if(!empty($dataColaborador->zonasLaborales)){
+            $colabs=[];
+            $x=0;
+            foreach($colaboradores as $colaborador) { 
+                $filtroFind = false;                
+                foreach(json_decode($colaborador->zonasLaborales) as $zonaLaboral) { 
+                    foreach($dataColaborador->zonasLaborales as $zonaFiltro) { 
+                        if($zonaFiltro->nombre == $zonaLaboral->nombre){
+                            $filtroFind = true;
+                        }
+                    }
+                    
+                }
+                if($filtroFind){
+                    $colabs[$x]=$colaborador;
+                    $x++;
+                }
+            }
+            $colaboradores =$colabs;    
+        }*/
+
         $resp["data"]=$colaboradores;
         $resp["count"] =$colaboradorModel->getColaboradoresNums($dataColaborador)[0];
 		return $this->respond($resp);
