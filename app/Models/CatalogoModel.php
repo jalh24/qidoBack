@@ -51,6 +51,11 @@ class CatalogoModel extends Model
   public function getCalificacion() { 
     $query = $this->db->query('select * from calificacion');
     return $query->getResult();
+  }
+
+  public function getTipoVisa() { 
+    $query = $this->db->query('select * from tipovisa');
+    return $query->getResult();
   } 
 
   public function getTipoColaborador() { 
