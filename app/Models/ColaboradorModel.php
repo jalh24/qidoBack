@@ -146,10 +146,11 @@ public function insert_data($data = array())
   }
   
   public function getColaboradorId($colaboradorFiltro) { 
-    $filter = ' inner join colaboradorzona colabzona on colab.idColaborador = colabzona.idColaborador where colab.idColaborador =  '. $colaboradorFiltro;
+    $filter = ' inner join colaboradorzona colabzona on colab.idColaborador = colabzona.idColaborador';
+    $filter = $filter . ' inner join pais paisNacimiento on colab.idPaisNacimiento = paisNacimiento.idPais';
 
-    $query = $this->db->query('select DISTINCT colab.* from ' . $this->table . ' colab '.
-                              $filter);
+    $query = $this->db->query('select DISTINCT colab.*, paisNacimiento.nombre paisNacimiento from ' . $this->table . ' colab '.
+                              $filter . ' where colab.idColaborador =  '. $colaboradorFiltro);
     return $query->getResult();
   } 
 
