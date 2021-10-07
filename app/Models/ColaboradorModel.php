@@ -147,19 +147,20 @@ public function insert_data($data = array())
   
   public function getColaboradorId($colaboradorFiltro) { 
     $filter = ' inner join colaboradorzona colabzona on colab.idColaborador = colabzona.idColaborador';
-    $filter = $filter . ' inner join tipocolaborador tipoColaboradorConId on colab.idTipoColaborador = tipoColaboradorConId.idTipoColaborador';
-    $filter = $filter . ' inner join pais paisNacimiento on colab.idPaisNacimiento = paisNacimiento.idPais';
-    $filter = $filter . ' inner join estado estadoNacimiento on colab.idEstadoNacimiento = estadoNacimiento.idEstado';
-    $filter = $filter . ' inner join ciudad ciudadNacimiento on colab.idCiudadNacimiento = ciudadNacimiento.idCiudad';
-    $filter = $filter . ' inner join colonia coloniaDir on colab.idColonia = coloniaDir.idColonia';
-    $filter = $filter . ' inner join ciudad ciudadDir on colab.idCiudad = ciudadDir.idCiudad';
-    $filter = $filter . ' inner join estado estadoDir on colab.idEstado = estadoDir.idEstado';
-    $filter = $filter . ' inner join pais paisDir on colab.idPais = paisDir.idPais';
-    $filter = $filter . ' inner join sexocat genero on colab.idSexo = genero.idSexo';
-    $filter = $filter . ' inner join tezcat tez on colab.idTez = tez.idTez';
-    $filter = $filter . ' inner join estadocivilcat estadoCivil on colab.idEstadoCivil = estadoCivil.idEstadoCivil';
-    $filter = $filter . ' inner join tipotelefono tipoTelefono1 on colab.idTipoTelefono = tipoTelefono1.idTipoTel';
-    $filter = $filter . ' inner join tipotelefono tipoTelefono2 on colab.idTipoTelefono2 = tipoTelefono2.idTipoTel';
+    $filter = $filter . ' left join tipocolaborador tipoColaboradorConId on colab.idTipoColaborador = tipoColaboradorConId.idTipoColaborador';
+    $filter = $filter . ' left join pais paisNacimiento on colab.idPaisNacimiento = paisNacimiento.idPais';
+    $filter = $filter . ' left join estado estadoNacimiento on colab.idEstadoNacimiento = estadoNacimiento.idEstado';
+    $filter = $filter . ' left join ciudad ciudadNacimiento on colab.idCiudadNacimiento = ciudadNacimiento.idCiudad';
+    $filter = $filter . ' left join colonia coloniaDir on colab.idColonia = coloniaDir.idColonia';
+    $filter = $filter . ' left join ciudad ciudadDir on colab.idCiudad = ciudadDir.idCiudad';
+    $filter = $filter . ' left join estado estadoDir on colab.idEstado = estadoDir.idEstado';
+    $filter = $filter . ' left join pais paisDir on colab.idPais = paisDir.idPais';
+    $filter = $filter . ' left join sexocat genero on colab.idSexo = genero.idSexo';
+    $filter = $filter . ' left join tezcat tez on colab.idTez = tez.idTez';
+    $filter = $filter . ' left join estadocivilcat estadoCivil on colab.idEstadoCivil = estadoCivil.idEstadoCivil';
+    $filter = $filter . ' left join tipotelefono tipoTelefono1 on colab.idTipoTelefono = tipoTelefono1.idTipoTel';
+    $filter = $filter . ' left join tipotelefono tipoTelefono2 on colab.idTipoTelefono2 = tipoTelefono2.idTipoTel';
+    $filter = $filter . ' left join permanencia permanenciaColab on colab.idPermanencia = permanenciaColab.idPermanencia';
 
     $query = $this->db->query('select DISTINCT colab.*, tipoColaboradorConId.nombre tipoColaboradorConId, 
     paisNacimiento.nombre paisNacimiento, 
@@ -173,7 +174,8 @@ public function insert_data($data = array())
     tez.nombre tez,
     estadoCivil.nombre estadoCivil,
     tipoTelefono1.nombre tipoTelefono1,
-    tipoTelefono2.nombre tipoTelefono2 from ' . $this->table . ' colab '.
+    tipoTelefono2.nombre tipoTelefono2,
+    permanenciaColab.nombre permanenciaColab from ' . $this->table . ' colab '.
                               $filter . ' where colab.idColaborador =  '. $colaboradorFiltro);
     return $query->getResult();
   } 
