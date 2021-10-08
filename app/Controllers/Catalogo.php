@@ -120,6 +120,13 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function gradoEstudios()
+	{	
+		$catalogoModel = new CatalogoModel();	
+		$resp["data"]=$catalogoModel->getGradoEstudio();
+		return $this->respond($resp);
+	}
+
 	public function tipoVisas()
 	{	
 		$catalogoModel = new CatalogoModel();	

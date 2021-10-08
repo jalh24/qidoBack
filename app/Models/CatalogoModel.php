@@ -53,6 +53,11 @@ class CatalogoModel extends Model
     return $query->getResult();
   }
 
+  public function getGradoEstudio() { 
+    $query = $this->db->query('select * from ultimogradoestudios');
+    return $query->getResult();
+  }
+
   public function getTipoVisa() { 
     $query = $this->db->query('select * from tipovisa');
     return $query->getResult();
