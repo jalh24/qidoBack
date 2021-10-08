@@ -163,6 +163,7 @@ class Colaborador extends BaseController
             $cuenta = [
                 'idColaborador'=>$colaborador,
                 'idBanco'  => $cuenta1->banco->idBanco,
+                'beneficiario' => $cuenta1->nombre,
                 'numero'  => $cuenta1->numero,
                 'tipoCuenta' => $cuenta1->tipoCuenta
             ];
@@ -316,8 +317,15 @@ class Colaborador extends BaseController
     // colaboradorId
     public function colaboradorId(){
         $colaboradorModel = new ColaboradorModel();
+        $cuentaColaboradorModel = new CuentaColaboradorModel();
+        $estudioModel = new EstudioModel();
         $id = $this->request->getVar('idColaborador');
-                    $resp["data"]=$colaboradorModel->getColaboradorId($id);
-                    return $this->respond($resp);        
+        $colaborador=$colaboradorModel->getColaboradorId($id);
+        $colaborador["cuentas"] = $cuentaColaboradorModel->getContactosColaborador($id);
+        $colaborador["estudios"] = $estudioModel->getEstudiosColaborador($id);
+
+        $resp["data"] = $colaborador;
+
+        return $this->respond($resp);        
     }
 }
