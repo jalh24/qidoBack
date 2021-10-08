@@ -35,8 +35,8 @@ class EstudioModel extends Model
       ));
   }
 
-  public function getContactosColaborador($idColaborador) { 
-    $query = $this->db->query('select * from ' . $this->table . ' where idColaborador ='.$idColaborador);
+  public function getEstudiosColaborador($idColaborador) { 
+    $query = $this->db->query('select est.*, es.nombre estatusNombre from ' . $this->table . ' est inner join estatus  es on es.idEstatus = est.idEstatus where idColaborador ='.$idColaborador);
     return $query->getResult();
   } 
 
