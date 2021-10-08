@@ -319,10 +319,12 @@ class Colaborador extends BaseController
         $colaboradorModel = new ColaboradorModel();
         $cuentaColaboradorModel = new CuentaColaboradorModel();
         $estudioModel = new EstudioModel();
+        $experienciaModel = new ExperienciaModel();
         $id = $this->request->getVar('idColaborador');
         $colaborador=$colaboradorModel->getColaboradorId($id);
         $colaborador["cuentas"] = $cuentaColaboradorModel->getContactosColaborador($id);
         $colaborador["estudios"] = $estudioModel->getEstudiosColaborador($id);
+        $colaborador["experiencia"] = $experienciaModel->getExperienciasColaborador($id);
 
         $resp["data"] = $colaborador;
 

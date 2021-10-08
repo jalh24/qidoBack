@@ -35,7 +35,7 @@ class ExperienciaModel extends Model
       ));
   }
 
-  public function getContactosColaborador($idColaborador) { 
+  public function getExperienciasColaborador($idColaborador) { 
     $query = $this->db->query('select * from ' . $this->table . ' where idColaborador ='.$idColaborador);
     return $query->getResult();
   } 
