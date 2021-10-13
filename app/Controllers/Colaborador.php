@@ -41,6 +41,27 @@ class Colaborador extends BaseController
             }
             $colaboradores =$colabs;    
         }
+
+        // if(!empty($dataColaborador->diasLaborales)){
+        //     $colabs=[];
+        //     $x=0;
+        //     foreach($colaboradores as $colaborador) { 
+        //         $filtroFind = false;                
+        //         // foreach(json_decode($colaborador->horario) as $diaLaboral) { 
+        //             foreach($dataColaborador->diasLaborales as $diaLaboralFiltro) { 
+        //                 if($diaLaboralFiltro->nombre == "lunes" && $colaborador->lunes == true){
+        //                     $filtroFind = true;
+        //                 }
+        //             }
+                    
+        //         // }
+        //         if($filtroFind){
+        //             $colabs[$x]=$colaborador;
+        //             $x++;
+        //         }
+        //     }
+        //     $colaboradores =$colabs;    
+        // }
         /*if(!empty($dataColaborador->zonasLaborales)){
             $colabs=[];
             $x=0;

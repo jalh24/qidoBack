@@ -1,6 +1,8 @@
 <?php namespace App\Models;
 
 use CodeIgniter\Model;
+use \Datetime;
+use \DateInterval;
 
 class ColaboradorModel extends Model
 {
@@ -68,6 +70,22 @@ public function insert_data($data = array())
       if(!empty($colaboradorFiltro->estatura1) && !empty($colaboradorFiltro->estatura2)){
         $filter = $filter . ' and (estatura between ' . $colaboradorFiltro->estatura1 . ' and ' . $colaboradorFiltro->estatura2 .' ) ';
       }
+      if(!empty($colaboradorFiltro->calificacion1) && !empty($colaboradorFiltro->calificacion2)){
+        $filter = $filter . ' and (idCalificacion between ' . $colaboradorFiltro->calificacion1 . ' and ' . $colaboradorFiltro->calificacion2 .' ) ';
+      }
+      if(!empty($colaboradorFiltro->edad1) && !empty($colaboradorFiltro->edad2)){
+        $diaActual = new DateTime();
+        // $diaActual = date("Y-m-d");
+        $diaActualMin = new DateTime();
+        $diaActualMax = new DateTime();
+        $diaActualMax->sub(new DateInterval('P'.($colaboradorFiltro->edad2+1).'Y'));
+        $diaActualMax->add(new DateInterval('P1D'));
+        $diaActualMin->sub(new DateInterval('P'.($colaboradorFiltro->edad1).'Y'));
+        $diaActualConv = $diaActual->format('Y-m-d');
+        $diaActualMinConv = $diaActualMin->format('Y-m-d');
+        $diaActualMaxConv = $diaActualMax->format('Y-m-d');
+        $filter = $filter . ' and (fecha_nacimiento between \'' . $diaActualMaxConv . '\' and \'' . $diaActualMinConv .'\' ) ';
+      }
       if(!empty($colaboradorFiltro->zonasLaborales)){
           $filter = $filter . ' and colabzona.idZonaLaboral in  ( ';
           $x =1;
@@ -82,9 +100,9 @@ public function insert_data($data = array())
       }
     }
     
-    /*var_dump('select * from ' . $this->table .
-                              $filter . ' LIMIT '.$colaboradorFiltro->limit.','. $colaboradorFiltro->start);
-   */
+    //  var_dump('select DISTINCT colab.* from ' . $this->table . ' colab '.
+    //  $filter . ' LIMIT '.$colaboradorFiltro->start.','. $colaboradorFiltro->limit);
+   
 
     $query = $this->db->query('select DISTINCT colab.* from ' . $this->table . ' colab '.
                               $filter . ' LIMIT '.$colaboradorFiltro->start.','. $colaboradorFiltro->limit);
@@ -122,7 +140,22 @@ public function insert_data($data = array())
     if(!empty($colaboradorFiltro->estatura1) && !empty($colaboradorFiltro->estatura2)){
       $filter = $filter . ' and (estatura between ' . $colaboradorFiltro->estatura1 . ' and ' . $colaboradorFiltro->estatura2 .' ) ';
     }
-
+    if(!empty($colaboradorFiltro->calificacion1) && !empty($colaboradorFiltro->calificacion2)){
+      $filter = $filter . ' and (idCalificacion between ' . $colaboradorFiltro->calificacion1 . ' and ' . $colaboradorFiltro->calificacion2 .' ) ';
+    }
+    if(!empty($colaboradorFiltro->edad1) && !empty($colaboradorFiltro->edad2)){
+      $diaActual = new DateTime();
+      // $diaActual = date("Y-m-d");
+      $diaActualMin = new DateTime();
+      $diaActualMax = new DateTime();
+      $diaActualMax->sub(new DateInterval('P'.($colaboradorFiltro->edad2+1).'Y'));
+      $diaActualMax->add(new DateInterval('P1D'));
+      $diaActualMin->sub(new DateInterval('P'.($colaboradorFiltro->edad1).'Y'));
+      $diaActualConv = $diaActual->format('Y-m-d');
+      $diaActualMinConv = $diaActualMin->format('Y-m-d');
+      $diaActualMaxConv = $diaActualMax->format('Y-m-d');
+      $filter = $filter . ' and (fecha_nacimiento between \'' . $diaActualMaxConv . '\' and \'' . $diaActualMinConv .'\' ) ';
+    }
     if(!empty($colaboradorFiltro->zonasLaborales)){
           $filter = $filter . ' and colabzona.idZonaLaboral in  ( ';
           $x =1;
