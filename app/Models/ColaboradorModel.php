@@ -39,7 +39,7 @@ public function insert_data($data = array())
 
   public function getColaboradores($colaboradorFiltro) { 
     if(!empty($colaboradorFiltro->zonasLaborales)){
-      $filter = ' inner join colaboradorzona colabzona on colab.idColaborador = colabzona.idColaborador where colab.idColaborador > 0 ';
+      $filter = ' left join colaboradorzona colabzona on colab.idColaborador = colabzona.idColaborador where colab.idColaborador > 0 ';
     } else{
       $filter = ' where idColaborador > 0 ';  
     }

@@ -42,26 +42,240 @@ class Colaborador extends BaseController
             $colaboradores =$colabs;    
         }
 
-        // if(!empty($dataColaborador->diasLaborales)){
-        //     $colabs=[];
-        //     $x=0;
-        //     foreach($colaboradores as $colaborador) { 
-        //         $filtroFind = false;                
-        //         // foreach(json_decode($colaborador->horario) as $diaLaboral) { 
-        //             foreach($dataColaborador->diasLaborales as $diaLaboralFiltro) { 
-        //                 if($diaLaboralFiltro->nombre == "lunes" && $colaborador->lunes == true){
-        //                     $filtroFind = true;
-        //                 }
-        //             }
-                    
-        //         // }
-        //         if($filtroFind){
-        //             $colabs[$x]=$colaborador;
-        //             $x++;
-        //         }
-        //     }
-        //     $colaboradores =$colabs;    
-        // }
+        if(!empty($dataColaborador->diasLaborales) && empty($dataColaborador->turnoHorario)){
+            $colabs=[];
+            $x=0;
+            foreach($colaboradores as $colaborador) {
+                $filtroFind = false;   
+                $diaLaboral1 = json_decode($colaborador->horario);
+                if (sizeof($dataColaborador->diasLaborales) == 7){
+                    if ($diaLaboral1->todosDias){
+                        $filtroFind = true;
+                    }
+                } else {
+                foreach($dataColaborador->diasLaborales as $diaLaboralFiltro){
+                    if($diaLaboralFiltro->nombre == "Lunes"){
+                        if($diaLaboral1->lunes){
+                            // if($diaLaboral1->lunesTurno ==){
+                            //     $filtroFind = true;
+                            // }
+                            $filtroFind = true;
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Martes"){
+                        if($diaLaboral1->martes){
+                            $filtroFind = true;
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Miercoles"){
+                        if($diaLaboral1->miercoles){
+                            $filtroFind = true;
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Jueves"){
+                        if($diaLaboral1->jueves){
+                            $filtroFind = true;
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Viernes"){
+                        if($diaLaboral1->viernes){
+                            $filtroFind = true;
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Sabado"){
+                        if($diaLaboral1->sabado){
+                            $filtroFind = true;
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Domingo"){
+                        if($diaLaboral1->domingo){
+                            $filtroFind = true;
+                        }
+                    }
+                }
+            }
+                // var_dump(json_decode($colaborador->horario));
+                //  foreach(json_decode($colaborador->horario) as $diaLaboral) { 
+                //     foreach($dataColaborador->diasLaborales as $diaLaboralFiltro) {
+                //         var_dump($diaLaboralFiltro);
+                //         // if($diaLaboralFiltro->nombre == "Lunes"){
+                //         //     if($diaLaboral->lunes){
+                //         //         $filtroFind = true;
+                //         //     }
+                //         // }
+                //     }                   
+                //  }
+                if($filtroFind){
+                    $colabs[$x]=$colaborador;
+                    $x++;
+                }
+            }
+            $colaboradores =$colabs;    
+        } else if (!empty($dataColaborador->diasLaborales) && !empty($dataColaborador->turnoHorario)){
+            $colabs=[];
+            $x=0;
+            foreach($colaboradores as $colaborador) {
+                $filtroFind = false;   
+                $diaLaboral1 = json_decode($colaborador->horario);
+                if (sizeof($dataColaborador->diasLaborales) == 7){
+                    if ($diaLaboral1->todosDias){
+                        if($diaLaboral1->todosDiasTurno == $dataColaborador->turnoHorario){
+                            $filtroFind = true;
+                        }
+                    }
+                } else {
+                foreach($dataColaborador->diasLaborales as $diaLaboralFiltro){
+                    if($diaLaboralFiltro->nombre == "Lunes"){
+                        if($diaLaboral1->lunes){
+                            if($diaLaboral1->lunesTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Martes"){
+                        if($diaLaboral1->martes){
+                            if($diaLaboral1->martesTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Miercoles"){
+                        if($diaLaboral1->miercoles){
+                            if($diaLaboral1->miercolesTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Jueves"){
+                        if($diaLaboral1->jueves){
+                            if($diaLaboral1->juevesTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Viernes"){
+                        if($diaLaboral1->viernes){
+                            if($diaLaboral1->viernesTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Sabado"){
+                        if($diaLaboral1->sabado){
+                            if($diaLaboral1->sabadoTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    }
+                    if($diaLaboralFiltro->nombre == "Domingo"){
+                        if($diaLaboral1->domingo){
+                            if($diaLaboral1->domingoTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    }
+                }
+            }
+                // var_dump(json_decode($colaborador->horario));
+                //  foreach(json_decode($colaborador->horario) as $diaLaboral) { 
+                //     foreach($dataColaborador->diasLaborales as $diaLaboralFiltro) {
+                //         var_dump($diaLaboralFiltro);
+                //         // if($diaLaboralFiltro->nombre == "Lunes"){
+                //         //     if($diaLaboral->lunes){
+                //         //         $filtroFind = true;
+                //         //     }
+                //         // }
+                //     }                   
+                //  }
+                if($filtroFind){
+                    $colabs[$x]=$colaborador;
+                    $x++;
+                }
+            }
+            $colaboradores =$colabs;
+        } else if (empty($dataColaborador->diasLaborales) && !empty($dataColaborador->turnoHorario)){
+            $colabs=[];
+            $x=0;
+            foreach($colaboradores as $colaborador) {
+                $filtroFind = false;   
+                $diaLaboral1 = json_decode($colaborador->horario);
+                // if (sizeof($dataColaborador->diasLaborales) == 7){
+                    if ($diaLaboral1->todosDias){
+                        if($diaLaboral1->todosDiasTurno == $dataColaborador->turnoHorario){
+                            $filtroFind = true;
+                        }
+                    }
+                // } else {
+                // foreach($dataColaborador->diasLaborales as $diaLaboralFiltro){
+                    // if($diaLaboralFiltro->nombre == "Lunes"){
+                        if($diaLaboral1->lunes){
+                            if($diaLaboral1->lunesTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    // }
+                    // if($diaLaboralFiltro->nombre == "Martes"){
+                        if($diaLaboral1->martes){
+                            if($diaLaboral1->martesTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    // }
+                    // if($diaLaboralFiltro->nombre == "Miercoles"){
+                        if($diaLaboral1->miercoles){
+                            if($diaLaboral1->miercolesTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    // }
+                    // if($diaLaboralFiltro->nombre == "Jueves"){
+                        if($diaLaboral1->jueves){
+                            if($diaLaboral1->juevesTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    // }
+                    // if($diaLaboralFiltro->nombre == "Viernes"){
+                        if($diaLaboral1->viernes){
+                            if($diaLaboral1->viernesTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    // }
+                    // if($diaLaboralFiltro->nombre == "Sabado"){
+                        if($diaLaboral1->sabado){
+                            if($diaLaboral1->sabadoTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    // }
+                    // if($diaLaboralFiltro->nombre == "Domingo"){
+                        if($diaLaboral1->domingo){
+                            if($diaLaboral1->domingoTurno == $dataColaborador->turnoHorario){
+                                $filtroFind = true;
+                            }
+                        }
+                    // }
+                // }
+            // }
+                // var_dump(json_decode($colaborador->horario));
+                //  foreach(json_decode($colaborador->horario) as $diaLaboral) { 
+                //     foreach($dataColaborador->diasLaborales as $diaLaboralFiltro) {
+                //         var_dump($diaLaboralFiltro);
+                //         // if($diaLaboralFiltro->nombre == "Lunes"){
+                //         //     if($diaLaboral->lunes){
+                //         //         $filtroFind = true;
+                //         //     }
+                //         // }
+                //     }                   
+                //  }
+                if($filtroFind){
+                    $colabs[$x]=$colaborador;
+                    $x++;
+                }
+            }
+            $colaboradores =$colabs;
+        }
         /*if(!empty($dataColaborador->zonasLaborales)){
             $colabs=[];
             $x=0;
