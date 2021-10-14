@@ -92,6 +92,20 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function complexiones()
+	{
+		$catalogoModel = new CatalogoModel();	
+		$resp["data"]=$catalogoModel->getComplexiones();
+		return $this->respond($resp);
+	}
+
+	public function parentescos()
+	{
+		$catalogoModel = new CatalogoModel();	
+		$resp["data"]=$catalogoModel->getParentescos();
+		return $this->respond($resp);
+	}
+
 	public function bancos()
 	{
 		$catalogoModel = new CatalogoModel();	

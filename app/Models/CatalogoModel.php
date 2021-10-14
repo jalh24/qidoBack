@@ -33,13 +33,18 @@ class CatalogoModel extends Model
     return $query->getResult();
   } 
 
-  public function getParentesco() { 
+  public function getParentescos() { 
     $query = $this->db->query('select * from parentescocat');
     return $query->getResult();
   } 
 
   public function getTez() { 
     $query = $this->db->query('select * from tezcat');
+    return $query->getResult();
+  } 
+
+  public function getComplexiones() { 
+    $query = $this->db->query('select * from complexiones');
     return $query->getResult();
   } 
 
