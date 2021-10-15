@@ -312,6 +312,7 @@ class Colaborador extends BaseController
             'a_paterno'  => $dataColaborador->a_paterno,
             'a_materno'  => $dataColaborador->a_materno,
             'correoElectronico'  => $dataColaborador->correoElectronico,
+            'idGradoEstudio'  => $dataColaborador->idGradoEstudio,
             'telefono'  => $dataColaborador->telefono,
             'idTipoTelefono'  => $dataColaborador->idTipoTelefono,
             'telefono2'  => $dataColaborador->telefono2,
