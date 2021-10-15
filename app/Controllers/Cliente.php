@@ -12,35 +12,15 @@ class Cliente extends BaseController
 
 	public function index()
 	{
+        
         $json = file_get_contents('php://input');
         $dataCliente = json_decode($json);
 		$clienteModel = new ClienteModel();
-		$clientes = $clienteModel->getClientes($dataCliente);
+		$clientes = $clienteModel->getClientes();
 		
 		
-        /*if(!empty($dataCliente->zonasLaborales)){
-            $colabs=[];
-            $x=0;
-            foreach($clientes as $cliente) { 
-                $filtroFind = false;                
-                foreach(json_decode($cliente->zonasLaborales) as $zonaLaboral) { 
-                    foreach($dataCliente->zonasLaborales as $zonaFiltro) { 
-                        if($zonaFiltro->nombre == $zonaLaboral->nombre){
-                            $filtroFind = true;
-                        }
-                    }
-                    
-                }
-                if($filtroFind){
-                    $colabs[$x]=$cliente;
-                    $x++;
-                }
-            }
-            $clientes =$colabs;    
-        }*/
-
         $resp["data"]=$clientes;
-       // $resp["count"] =$clienteModel->getClientesNums($dataCliente)[0];
+       //$resp["count"] =$clienteModel->getClientesNums($dataCliente)[0];
 		return $this->respond($resp);
 	}
 

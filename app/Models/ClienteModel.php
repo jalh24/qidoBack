@@ -19,7 +19,7 @@ class ClienteModel extends Model
       return $this->db->insertID();
   }
 
-  public function getClientes($idColaborador) { 
+  public function getClientes() { 
     $query = $this->db->query('select * from ' . $this->table . '');
     return $query->getResult();
   } 
