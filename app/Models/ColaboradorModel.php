@@ -180,6 +180,7 @@ public function insert_data($data = array())
   
   public function getColaboradorId($colaboradorFiltro) { 
     $filter = ' inner join colaboradorzona colabzona on colab.idColaborador = colabzona.idColaborador';
+    $filter = $filter . ' left join calificacion calificacionConId on colab.idCalificacion = calificacionConId.idCalificacion';
     $filter = $filter . ' left join tipocolaborador tipoColaboradorConId on colab.idTipoColaborador = tipoColaboradorConId.idTipoColaborador';
     $filter = $filter . ' left join pais paisNacimiento on colab.idPaisNacimiento = paisNacimiento.idPais';
     $filter = $filter . ' left join estado estadoNacimiento on colab.idEstadoNacimiento = estadoNacimiento.idEstado';
@@ -195,7 +196,8 @@ public function insert_data($data = array())
     $filter = $filter . ' left join tipotelefono tipoTelefono2 on colab.idTipoTelefono2 = tipoTelefono2.idTipoTel';
     $filter = $filter . ' left join permanencia permanenciaColab on colab.idPermanencia = permanenciaColab.idPermanencia';
 
-    $query = $this->db->query('select DISTINCT colab.*, tipoColaboradorConId.nombre tipoColaboradorConId, 
+    $query = $this->db->query('select DISTINCT colab.*, calificacionConId.nombre calificacionConId,
+    tipoColaboradorConId.nombre tipoColaboradorConId, 
     paisNacimiento.nombre paisNacimiento, 
     estadoNacimiento.nombre estadoNacimiento, 
     ciudadNacimiento.nombre ciudadNacimiento,
