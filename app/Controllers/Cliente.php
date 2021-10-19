@@ -94,14 +94,11 @@ class Cliente extends BaseController
             $contacto = [
                 'idCliente'=>$cliente,
                 'nombre'  => $contacto1->nombre,
-                'idParentesco' =>$contacto1->parentesco,
+                'idParentesco' =>$contacto1->parentesco->idParentesco,
                 'telefono'  => $contacto1->telefono,
-                'idTipoTelefono'  => $contacto1->tipoTelefono,
-                'correoElectronico'  => $contacto1->correoElectronico
-                
-                
+                'idTipoTelefono'  => $contacto1->tipoTelefono->idTipoTel,
+                'correoElectronico'  => $contacto1->correoElectronico    
             ];
-            
             $contactoClienteModel->insert_data($contacto);
         }
 
