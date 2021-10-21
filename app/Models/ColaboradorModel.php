@@ -64,6 +64,27 @@ public function insert_data($data = array())
       if(!empty($colaboradorFiltro->dispuestoViajar)){
         $filter = $filter . ' and dispuestoViajar= ' . $colaboradorFiltro->dispuestoViajar;
       }
+      if(!empty($colaboradorFiltro->hijos)){
+        $filter = $filter . ' and hijos= ' . $colaboradorFiltro->hijos;
+      }
+      if(!empty($colaboradorFiltro->hijosViven)){
+        $filter = $filter . ' and hijosViven= ' . $colaboradorFiltro->hijosViven;
+      }
+      if(!empty($colaboradorFiltro->hacerComer)){
+        $filter = $filter . ' and hacerComer= ' . $colaboradorFiltro->hacerComer;
+      }
+      if(!empty($colaboradorFiltro->limpiarUtensiliosCocina)){
+        $filter = $filter . ' and limpiarUtensiliosCocina= ' . $colaboradorFiltro->limpiarUtensiliosCocina;
+      }
+      if(!empty($colaboradorFiltro->limpiarDormitorio)){
+        $filter = $filter . ' and limpiarDormitorio= ' . $colaboradorFiltro->limpiarDormitorio;
+      }
+      if(!empty($colaboradorFiltro->limpiarBano)){
+        $filter = $filter . ' and limpiarBano= ' . $colaboradorFiltro->limpiarBano;
+      }
+      if(!empty($colaboradorFiltro->ayudaPaciente)){
+        $filter = $filter . ' and ayudaPaciente= ' . $colaboradorFiltro->ayudaPaciente;
+      }
       if(!empty($colaboradorFiltro->peso1) && !empty($colaboradorFiltro->peso2)){
         $filter = $filter . ' and (peso between ' . $colaboradorFiltro->peso1 . ' and ' . $colaboradorFiltro->peso2 .' ) ';
       }
@@ -133,6 +154,27 @@ public function insert_data($data = array())
     }
     if(!empty($colaboradorFiltro->dispuestoViajar)){
       $filter = $filter . ' and dispuestoViajar= ' . $colaboradorFiltro->dispuestoViajar;
+    }
+    if(!empty($colaboradorFiltro->hijos)){
+      $filter = $filter . ' and hijos= ' . $colaboradorFiltro->hijos;
+    }
+    if(!empty($colaboradorFiltro->hijosViven)){
+      $filter = $filter . ' and hijosViven= ' . $colaboradorFiltro->hijosViven;
+    }
+    if(!empty($colaboradorFiltro->hacerComer)){
+      $filter = $filter . ' and hacerComer= ' . $colaboradorFiltro->hacerComer;
+    }
+    if(!empty($colaboradorFiltro->limpiarUtensiliosCocina)){
+      $filter = $filter . ' and limpiarUtensiliosCocina= ' . $colaboradorFiltro->limpiarUtensiliosCocina;
+    }
+    if(!empty($colaboradorFiltro->limpiarDormitorio)){
+      $filter = $filter . ' and limpiarDormitorio= ' . $colaboradorFiltro->limpiarDormitorio;
+    }
+    if(!empty($colaboradorFiltro->limpiarBano)){
+      $filter = $filter . ' and limpiarBano= ' . $colaboradorFiltro->limpiarBano;
+    }
+    if(!empty($colaboradorFiltro->ayudaPaciente)){
+      $filter = $filter . ' and ayudaPaciente= ' . $colaboradorFiltro->ayudaPaciente;
     }
     if(!empty($colaboradorFiltro->peso1) && !empty($colaboradorFiltro->peso2)){
       $filter = $filter . ' and (peso between ' . $colaboradorFiltro->peso1 . ' and ' . $colaboradorFiltro->peso2 .' ) ';
