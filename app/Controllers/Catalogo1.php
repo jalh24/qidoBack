@@ -101,6 +101,15 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function tiposCliente()
+	{		
+		
+		$tiposCliente=(object) array('id' => '1','nombre' => 'Fisica');
+		$tiposCliente1=(object) array('id' => '2','nombre' => 'Moral');
+		//return view('welcome_message',$colaboradores);
+        $resp["data"]=[$tiposCliente,$tiposCliente1];
+		return $this->respond($resp);
+	}
 	public function permanencias()
 	{		
 		$default=(object) array('id' => '0','nombre' => 'Selecionar');

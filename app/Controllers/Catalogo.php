@@ -92,6 +92,8 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	
+
 	public function complexiones()
 	{
 		$catalogoModel = new CatalogoModel();	
@@ -161,6 +163,14 @@ class Catalogo extends BaseController
 		$resp["data"]=$catalogoModel->getTiposTelefono();
 		return $this->respond($resp);
 	}
+
+	public function tipoClientes()
+	{
+		$catalogoModel = new CatalogoModel();	
+		$resp["data"]=$catalogoModel->getTipoCliente();
+		return $this->respond($resp);
+	}
+
 
 	public function permanencias()
 	{	
