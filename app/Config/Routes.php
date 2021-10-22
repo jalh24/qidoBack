@@ -32,8 +32,18 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/login/', 'Login::iniciar');
 
+// Filter on route group
+$routes->group("/", ["filter" => "loginFilter"] , function($routes){
+
+    $routes->resource('colaborador');
+    
+});
+
+/*$routes->group('api', function ($routes) {
+    $routes->add('catalogo/zonasLaborales', 'Catalogo::zonasLaborales');
+});*/
 /*
  * --------------------------------------------------------------------
  * Additional Routing

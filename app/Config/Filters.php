@@ -16,6 +16,7 @@ class Filters extends BaseConfig
 	 * @var array
 	 */
 	public $aliases = [
+		'loginFilter' => \App\Filters\LoginFilter::class,
 		'csrf'     => CSRF::class,
 		'toolbar'  => DebugToolbar::class,
 		'honeypot' => Honeypot::class,
@@ -29,6 +30,7 @@ class Filters extends BaseConfig
 	 */
 	public $globals = [
 		'before' => [
+			'loginFilter'  => ['except' => ['login/*']]
 			// 'honeypot',
 			// 'csrf',
 		],
