@@ -7,6 +7,7 @@ use App\Models\CuentaColaboradorModel;
 use App\Models\ExperienciaModel;
 use App\Models\EstudioModel;
 use App\Models\ZonaModel;
+use App\Libraries\Twilio; // Import library
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
@@ -14,14 +15,14 @@ class Colaborador extends BaseController
 {
 	use ResponseTrait;
 
-	public function index()
-	{
+	public function lista()
+    {
         $json = file_get_contents('php://input');
         $dataColaborador = json_decode($json);
-		$colaboradorModel = new ColaboradorModel();
-		$colaboradores = $colaboradorModel->getColaboradores($dataColaborador);
-		
-		if(!empty($dataColaborador->habilidades)){
+        $colaboradorModel = new ColaboradorModel();
+        $colaboradores = $colaboradorModel->getColaboradores($dataColaborador);
+        
+        if(!empty($dataColaborador->habilidades)){
             $colabs=[];
             $x=0;
             foreach($colaboradores as $colaborador) { 
@@ -299,10 +300,10 @@ class Colaborador extends BaseController
 
         $resp["data"]=$colaboradores;
         $resp["count"] =$colaboradorModel->getColaboradoresNums($dataColaborador)[0];
-		return $this->respond($resp);
-	}
+        return $this->respond($resp);
+    }
 
-	// create
+    // create
     public function create() {
         $colaboradorModel = new ColaboradorModel();
         $json = file_get_contents('php://input');
@@ -582,4 +583,16 @@ class Colaborador extends BaseController
 
         return $this->respond($resp);        
     }
+
+    public function enviaMensaje(){
+        $json = file_get_contents('php://input');
+        $dataColaborador = json_decode($json);
+
+        
+
+        $resp["data"] = $colaborador;
+
+        return $this->respond($resp);        
+    }
+
 }
