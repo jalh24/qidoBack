@@ -586,11 +586,18 @@ class Colaborador extends BaseController
 
     public function enviaMensaje(){
         $json = file_get_contents('php://input');
-        $dataColaborador = json_decode($json);
+        $dataMultiple = json_decode($json);
+        $twilio = new Twilio();
 
-        
+        foreach($dataMultiple->colaboradores as $colaborador){
+            $mensaje = str_replace("%nombre%", $colaborador->nombre . " ". $colaborador->a_paterno
+                                    ,$dataMultiple->mensaje);
+            $numero = trim("+521".$colaborador->telefono);
+            $twilio->sendmessage($numero,
+                                "+17372105610",$mensaje);
+        }
 
-        $resp["data"] = $colaborador;
+        $resp["data"] = "Enviado con exito";
 
         return $this->respond($resp);        
     }
