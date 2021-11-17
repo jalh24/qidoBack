@@ -112,6 +112,86 @@ class Cliente extends BaseController
       return $this->respondCreated($response);
     }
 
-    
+    // update
+    public function update($id = null){
+        $clienteModel = new ClienteModel();
+        $id = $this->request->getVar('idCliente');
+        $data = [                      
+            'nombre'  => $this->request->getVar('nombre'),
+            'a_paterno'  => $this->request->getVar('a_paterno'),
+            'a_materno'  => $this->request->getVar('a_materno'),                     
+            'fecha_nacimiento'  => $this->request->getVar('fecha_nacimiento'),            
+            'rfc' => $this->request->getVar('rfc'),
+            'idPaisNacimiento'  => $this->request->getVar('idPaisNacimiento'),
+            'idEstadoNacimiento'  => $this->request->getVar('idEstadoNacimiento'),
+            'idCiudadNacimiento'  => $this->request->getVar('idCiudadNacimiento'),
+            'calle1'  => $this->request->getVar('calle1'),
+            'calle2'  => $this->request->getVar('calle2'),
+            'noExt'  => $this->request->getVar('noExt'),
+            'noInt'  => $this->request->getVar('noInt'),
+            'idColonia'  => $this->request->getVar('idColonia'),
+            'idCiudad'  => $this->request->getVar('idCiudad'),
+            'idEstado'  => $this->request->getVar('idEstado'),
+            'idPais'  => $this->request->getVar('idPais'),
+            'codigoPostal'  => $this->request->getVar('codigoPostal'),          
+            'referencia'  => $this->request->getVar('referencia'),
+            'idSexo'  => $this->request->getVar('idSexo'),
+            'imss'  => $this->request->getVar('imss'), 
+            'sgmm'  => $this->request->getVar('sgmm'),
+            'idComplexion'  => $this->request->getVar('idComplexion'),
+            'peso'  => $this->request->getVar('peso'),
+            'estatura'  => $this->request->getVar('estatura'),
+            'idEstadoCivil'  => $this->request->getVar('idEstadoCivil'),
+            'telefono'  => $this->request->getVar('telefono'),
+            'idTipoTelefono'  => $this->request->getVar('idTipoTelefono'),
+            'telefono2'  => $this->request->getVar('telefono2'),
+            'idTipoTelefono2'  => $this->request->getVar('idTipoTelefono2'),
+            'correoElectronico'  => $this->request->getVar('correoElectronico'),
+            'nombreContacto'  => $this->request->getVar('nombreContacto'),
+            'idParentescoContacto'  => $this->request->getVar('idParentescoContacto'),
+            'telefonoContacto'  => $this->request->getVar('telefonoContacto'),
+            'correoContacto'  => $this->request->getVar('correoContacto'),
+            'nombreContacto2'  => $this->request->getVar('nombreContacto2'),
+            'idParentescoContacto2'  => $this->request->getVar('idParentescoContacto2'),
+            'telefonoContacto2'  => $this->request->getVar('telefonoContacto2'),
+            'correoContacto2'  => $this->request->getVar('correoContacto2'),
+            'nombreMedico'  => $this->request->getVar('nombreMedico'),
+            'especialidadesMedico'  => $this->request->getVar('especialidadesMedico'),
+            'telefonoMedico'  => $this->request->getVar('telefonoMedico'),
+            'correoMedico'  => $this->request->getVar('correoMedico'),
+            'enfermedadesActuales'  => $this->request->getVar('enfermedadesActuales'),
+            'enfermedadesRecientes'  => $this->request->getVar('enfermedadesRecientes'),
+            'cirugiasRecientes'  => $this->request->getVar('cirugiasRecientes'),
+            'accidentesRecientes'  => $this->request->getVar('accidentesRecientes'),
+            'alzheimer'  => $this->request->getVar('alzheimer'),
+            'idTipoCliente'  => $this->request->getVar('idTipoCliente')
+            
+        ];
+
+        $clienteModel->update_data($id, $data);
+        $response = [
+          'status'   => 200,
+          'error'    => null,
+          'messages' => [
+              'success' => 'Cliente actualizado con exito'
+          ]
+      ];
+      return $this->respond($response);
+    }
+
+     // clienteId
+     public function clienteId(){
+        $clienteModel = new ClienteModel();
+        $contactoClienteModel = new ContactoClienteModel();
+       
+        $id = $this->request->getVar('idCliente');
+        $cliente=$clienteModel->getClienteId($id);
+        $cliente["cuentas"] = $contactoClienteModel->getContactosCliente($id);
+       
+
+        $resp["data"] = $cliente;
+
+        return $this->respond($resp);        
+    }
     
 }
