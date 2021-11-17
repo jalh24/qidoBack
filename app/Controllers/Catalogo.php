@@ -17,6 +17,34 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function clientes()
+	{
+		$catalogoModel = new CatalogoModel();	
+        $resp["data"]=$catalogoModel->getClientes();
+		return $this->respond($resp);
+	}
+
+	public function colaboradores()
+	{
+		$catalogoModel = new CatalogoModel();	
+        $resp["data"]=$catalogoModel->getColaboradores();
+		return $this->respond($resp);
+	}
+
+	public function servicioColaboradoresFiltro()
+	{
+		$catalogoModel = new CatalogoModel();	
+        $resp["data"]=$catalogoModel->getServicioColaboradoresFiltro();
+		return $this->respond($resp);
+	}
+
+	public function responsables()
+	{
+		$catalogoModel = new CatalogoModel();	
+		$resp["data"]=$catalogoModel->getResponsable();
+		return $this->respond($resp);
+	}
+
 	public function especialidades()
 	{
 		$catalogoModel = new CatalogoModel();	

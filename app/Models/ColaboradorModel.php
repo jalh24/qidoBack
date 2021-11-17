@@ -16,6 +16,11 @@ class ColaboradorModel extends Model
       // OR $this->db = db_connect();
   }
 
+  public function getDatos($dato) { 
+    $query = $this->db->query('select * from colaborador where idColaborador='.$dato);
+    return $query->getResult();
+  }
+
 public function insert_data($data = array())
   {
       $this->db->table($this->table)->insert($data);
@@ -51,6 +56,9 @@ public function insert_data($data = array())
       }
       if(!empty($colaboradorFiltro->permanencia)){
         $filter = $filter . ' and idPermanencia= ' . $colaboradorFiltro->permanencia;
+      }
+      if(!empty($colaboradorFiltro->tipoColaborador)){
+        $filter = $filter . ' and idTipoColaborador= ' . $colaboradorFiltro->tipoColaborador;
       }
       if(!empty($colaboradorFiltro->atiendeCovid)){
         $filter = $filter . ' and atiendeCovid= ' . $colaboradorFiltro->atiendeCovid;

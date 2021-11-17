@@ -18,6 +18,21 @@ class CatalogoModel extends Model
     return $query->getResult();
   } 
 
+  public function getClientes() { 
+    $query = $this->db->query('select idCliente, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from cliente');
+    return $query->getResult();
+  }
+
+  public function getColaboradores() { 
+    $query = $this->db->query('select idColaborador, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from colaborador');
+    return $query->getResult();
+  } 
+
+  public function getServicioColaboradoresFiltro() { 
+    $query = $this->db->query('select DISTINCT c.idColaborador, CONCAT_WS(" ",c.nombre,c.a_paterno,c.a_materno) as nombrecompleto from colaborador c inner join servicio s on s.colaborador = c.idColaborador' );
+    return $query->getResult();
+  } 
+
   public function getEspecialidades() { 
     $query = $this->db->query('select * from especialidad');
     return $query->getResult();
@@ -30,6 +45,11 @@ class CatalogoModel extends Model
 
   public function getSexo() { 
     $query = $this->db->query('select * from sexocat');
+    return $query->getResult();
+  }
+
+  public function getResponsable() { 
+    $query = $this->db->query('select * from responsable');
     return $query->getResult();
   } 
 
@@ -97,7 +117,7 @@ class CatalogoModel extends Model
     $query = $this->db->query('select * from pais');
     return $query->getResult();
   } 
-
+  
   public function getEstados($pais) { 
     $query = $this->db->query('select * from estado where idPais='.$pais);
     return $query->getResult();

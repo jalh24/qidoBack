@@ -35,8 +35,9 @@ class CuentaColaboradorModel extends Model
       ));
   }
 
-  public function getContactosColaborador($idColaborador) { 
-    $query = $this->db->query('select * from ' . $this->table . ' where idColaborador ='.$idColaborador);
+  public function getContactosColaborador($idColaborador) {
+    //   var_dump('select * from ' . $this->table . 'inner join banco on' . $this->table . '.idBanco = banco.idBanco where idColaborador ='.$idColaborador);
+    $query = $this->db->query('select * from ' . $this->table . ' inner join banco on ' . $this->table . '.idBanco = banco.idBanco where idColaborador ='.$idColaborador);
     return $query->getResult();
   } 
 

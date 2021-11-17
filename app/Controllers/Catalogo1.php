@@ -46,6 +46,33 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function complexiones()
+	{	
+		$default=(object) array('id' => '0','nombre' => 'Selecionar');
+		$complexiones=(object) array('id' => '1','nombre' => 'Delgado');
+		$complexiones1=(object) array('id' => '2','nombre' => 'Regular');
+		$complexiones2=(object) array('id' => '3','nombre' => 'Robusto');
+		$complexiones3=(object) array('id' => '4','nombre' => 'Obeso');
+		
+
+		//return view('welcome_message',$colaboradores);
+        $resp["data"]=[$default,$complexiones,$complexiones1,$complexiones2,$complexiones3,$complexiones4];
+		return $this->respond($resp);
+	}
+
+	public function parentescos()
+	{	
+		$default=(object) array('id' => '0','nombre' => 'Selecionar');
+		$parentescos=(object) array('id' => '1','nombre' => 'Familiar');
+		$parentescos1=(object) array('id' => '2','nombre' => 'Amigo');
+		$parentescos2=(object) array('id' => '3','nombre' => 'Conyuge');
+		$parentescos3=(object) array('id' => '4','nombre' => 'Vecino');
+		
+
+		//return view('welcome_message',$colaboradores);
+        $resp["data"]=[$default,$parentescos,$parentescos1,$parentescos2,$parentescos3,$parentescos4];
+		return $this->respond($resp);
+	}
 	public function estadosCiviles()
 	{	
 		$default=(object) array('id' => '0','nombre' => 'Selecionar');
@@ -74,6 +101,15 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function tiposCliente()
+	{		
+		
+		$tiposCliente=(object) array('id' => '1','nombre' => 'Fisica');
+		$tiposCliente1=(object) array('id' => '2','nombre' => 'Moral');
+		//return view('welcome_message',$colaboradores);
+        $resp["data"]=[$tiposCliente,$tiposCliente1];
+		return $this->respond($resp);
+	}
 	public function permanencias()
 	{		
 		$default=(object) array('id' => '0','nombre' => 'Selecionar');

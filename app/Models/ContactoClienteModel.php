@@ -35,8 +35,8 @@ class ContactoClienteModel extends Model
       ));
   }
 
-  public function getContactosCliente($idCliente) { 
-    $query = $this->db->query('select * from ' . $this->table . ' where idCliente ='.$idCliente);
+  public function getContactosColaborador($idColaborador) { 
+    $query = $this->db->query('select * from ' . $this->table . ' where idCliente ='.$idColaborador);
     return $query->getResult();
   } 
 

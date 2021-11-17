@@ -474,70 +474,80 @@ class Colaborador extends BaseController
     // update
     public function update($id = null){
         $colaboradorModel = new ColaboradorModel();
-        $id = $this->request->getVar('num_colaborador');
+        $id = $this->request->getVar('idColaborador');
+        $json = file_get_contents('php://input');
+        $dataColaborador = json_decode($json);
         $data = [
-            'rfc' => $this->request->getVar('rfc'),
-            'foto'  => $this->request->getVar('foto'),
-            'nombre'  => $this->request->getVar('nombre'),
-            'a_paterno'  => $this->request->getVar('a_paterno'),
-            'a_materno'  => $this->request->getVar('a_materno'),
-            'nss'  => $this->request->getVar('nss'),
-            'ine'  => $this->request->getVar('ine'),
-            'fecha_nacimiento'  => $this->request->getVar('fecha_nacimiento'),
-            'ldn_ciudad'  => $this->request->getVar('ldn_ciudad'),
-            'ldn_pais'  => $this->request->getVar('ldn_pais'),
-            'calle1'  => $this->request->getVar('calle1'),
-            'calle2'  => $this->request->getVar('calle2'),
-            'no_ext'  => $this->request->getVar('no_ext'),
-            'no_int'  => $this->request->getVar('no_int'),
-            'colonia'  => $this->request->getVar('colonia'),
-            'ciudad'  => $this->request->getVar('ciudad'),
-            'estado'  => $this->request->getVar('estado'),
-            'pais'  => $this->request->getVar('pais'),
-            'codigo_postal'  => $this->request->getVar('codigo_postal'),
-            'comprobante'  => $this->request->getVar('comprobante'),
-            'sexo'  => $this->request->getVar('sexo'),
-            'peso'  => $this->request->getVar('peso'),
-            'tez'  => $this->request->getVar('tez'),
-            'estado_civil'  => $this->request->getVar('estado_civil'),
-            'telefono1'  => $this->request->getVar('telefono1'),
-            'telefono1_tipo'  => $this->request->getVar('telefono1_tipo'),
-            'telefono2'  => $this->request->getVar('telefono2'),
-            'telefono2_tipo'  => $this->request->getVar('telefono2_tipo'),
-            'correo_electronico'  => $this->request->getVar('correo_electronico'),
-            'hijos'  => $this->request->getVar('hijos'),
-            'hijosViven'  => $this->request->getVar('hijosViven'),
-            'sgmm'  => $this->request->getVar('sgmm'),
-            'aseguradora'  => $this->request->getVar('aseguradora'),
-            'permanencia'  => $this->request->getVar('permanencia'),
-            'atiende_covid'  => $this->request->getVar('atiende_covid'),
-            'a_penales'  => $this->request->getVar('a_penales'),
-            'disp_viajar'  => $this->request->getVar('disp_viajar'),
-            'visa'  => $this->request->getVar('visa'),
-            'num_visa'  => $this->request->getVar('num_visa'),
-            'tipo_visa'  => $this->request->getVar('tipo_visa'),
-            'fechaexp_visa'  => $this->request->getVar('fechaexp_visa'),
-            'pasaporte'  => $this->request->getVar('pasaporte'),
-            'num_pasaporte'  => $this->request->getVar('num_pasaporte'),
-            'fechaexp_pasaporte'  => $this->request->getVar('fechaexp_pasaporte'),
-            'hacerComer'  => $this->request->getVar('hacerComer'),
-            'limpiarUtensiliosCocina'  => $this->request->getVar('limpiarUtensiliosCocina'),
-            'limpiarDormitorio'  => $this->request->getVar('limpiarDormitorio'),
-            'limpiarBano'  => $this->request->getVar('limpiarBano'),
-            'ayudaPaciente'  => $this->request->getVar('ayudaPaciente'),
-            'referencia'  => $this->request->getVar('referencia'),
-            'estatura'  => $this->request->getVar('estatura'),
-            'contacto1'  => $this->request->getVar('contacto1'),
-            'parentesco_con1'  => $this->request->getVar('parentesco_con1'),
-            'telefono_con1'  => $this->request->getVar('telefono_con1'),
-            'correo_con1'  => $this->request->getVar('correo_con1'),
-            'contacto2'  => $this->request->getVar('contacto2'),
-            'parentesco_con2'  => $this->request->getVar('parentesco_con2'),
-            'telefono_con2'  => $this->request->getVar('telefono_con2'),
-            'correo_con2'  => $this->request->getVar('correo_con2'),
-            'zona_laboral'  => $this->request->getVar('zona_laboral'),
-            'auto_propio'  => $this->request->getVar('auto_propio'),
-            'licenciaManejar'  => $this->request->getVar('licenciaManejar')
+            'nombre'  => $dataColaborador->nombre,
+            'a_paterno'  => $dataColaborador->a_paterno,
+            'a_materno'  => $dataColaborador->a_materno,
+            'correoElectronico'  => $dataColaborador->correoElectronico,
+            'hijos'  => intval($dataColaborador->hijos),
+            'hijosViven'  => intval($dataColaborador->hijosViven),
+            'idGradoEstudio'  => $dataColaborador->idGradoEstudio,
+            'telefono'  => $dataColaborador->telefono,
+            'idTipoTelefono'  => $dataColaborador->idTipoTelefono,
+            'telefono2'  => $dataColaborador->telefono2,
+            'idTipoTelefono2'  => $dataColaborador->idTipoTelefono2,
+            'foto'  => $dataColaborador->foto,
+            'fotoNombre'=> $dataColaborador->fotoNombre,
+            'idCalificacion'=> $dataColaborador->idCalificacion,
+            'idTipoColaborador'=> $dataColaborador->idTipoColaborador,
+            'observaciones'=> $dataColaborador->observaciones,
+            'rfc' => $dataColaborador->rfc,
+            'nss'  => $dataColaborador->nss,
+            'fecha_nacimiento'  => $dataColaborador->fecha_nacimiento,
+            'idPaisNacimiento'  => $dataColaborador->idPaisNacimiento,
+            'idEstadoNacimiento'  => $dataColaborador->idEstadoNacimiento,
+            'idCiudadNacimiento'  => $dataColaborador->idCiudadNacimiento,
+            'comprobanteDomicilio'  => $dataColaborador->comprobanteDomicilio,
+            'comprobanteNombre'  => $dataColaborador->comprobanteNombre,
+            'idSexo'  => $dataColaborador->idSexo,
+            'peso'  => $dataColaborador->peso,
+            'estatura'  => $dataColaborador->estatura,
+            'idEstadoCivil'  => $dataColaborador->idEstadoCivil,
+            'idTez'  => $dataColaborador->idTez,
+            'sgmm'  => $dataColaborador->sgmm,
+            'atiendeCovid'  => intval($dataColaborador->atiendeCovid),
+            'antecedentePenales'  => intval($dataColaborador->antecedentePenales),
+            'autoPropio'  => intval($dataColaborador->autoPropio),
+            'licenciaManejar'  => intval($dataColaborador->licenciaManejar),
+            'dispuestoViajar'  => intval($dataColaborador->dispuestoViajar),
+            'visa'  => intval($dataColaborador->visa),
+            'visaNumero'  => $dataColaborador->visaNumero,
+            'tipoVisa'  => $dataColaborador->tipoVisa,
+            'expiracionVisa'  => $dataColaborador->expiracionVisa,
+            'visaImagen'  => $dataColaborador->visaImagen,
+            'visaNombre'  => $dataColaborador->visaNombre,
+            'pasaporte'  => intval($dataColaborador->pasaporte),
+            'pasaporteNumero'  => $dataColaborador->pasaporteNumero,
+            'expiracionPasaporte'  => $dataColaborador->expiracionPasaporte,
+            'pasaporteImagen'  => $dataColaborador->pasaporteImagen,
+            'hacerComer'  => intval($dataColaborador->hacerComer),
+            'limpiarUtensiliosCocina'  => intval($dataColaborador->limpiarUtensiliosCocina),
+            'limpiarDormitorio'  => intval($dataColaborador->limpiarDormitorio),
+            'limpiarBano'  => intval($dataColaborador->limpiarBano),
+            'ayudaPaciente'  => intval($dataColaborador->ayudaPaciente),
+            'pasaporteNombre'  => $dataColaborador->pasaporteNombre,
+            'ine1'  => $dataColaborador->ine1,
+            'ine2'  => $dataColaborador->ine2,
+            'ine1Nombre'  => $dataColaborador->ine1Nombre,
+            'ine2Nombre'  => $dataColaborador->ine2Nombre,
+            'idPermanencia'  => $dataColaborador->idPermanencia,
+            'idEstatus'  => $dataColaborador->idEstatus,
+            'calle1'  => $dataColaborador->calle1,
+            'calle2'  => $dataColaborador->calle2,
+            'codigoPostal'  => $dataColaborador->codigoPostal,
+            'idPais'  => $dataColaborador->idPais,
+            'idEstado'  => $dataColaborador->idEstado,
+            'idCiudad'  => $dataColaborador->idCiudad,
+            'idColonia'  => $dataColaborador->idColonia,
+            'noExt'  => $dataColaborador->noExt,
+            'noInt'  => $dataColaborador->noInt,
+            'horario'  => json_encode($dataColaborador->horario),
+            'habilidades'  => json_encode($dataColaborador->habilidades),
+            'especialidades'  => json_encode($dataColaborador->especialidades),
+            'fechaCreacion' =>date('Y-m-d H:m:s')
         ];
 
         $colaboradorModel->update_data($id, $data);
@@ -578,7 +588,8 @@ class Colaborador extends BaseController
         $colaborador["cuentas"] = $cuentaColaboradorModel->getContactosColaborador($id);
         $colaborador["estudios"] = $estudioModel->getEstudiosColaborador($id);
         $colaborador["experiencia"] = $experienciaModel->getExperienciasColaborador($id);
-
+        // var_dump($colaborador[0]->habilidades);
+        // $colaborador["habilidades"] = json_encode($colaborador[0]->habilidades);
         $resp["data"] = $colaborador;
 
         return $this->respond($resp);        
@@ -586,20 +597,27 @@ class Colaborador extends BaseController
 
     public function enviaMensaje(){
         $json = file_get_contents('php://input');
-        $dataMultiple = json_decode($json);
-        $twilio = new Twilio();
+        $dataColaborador = json_decode($json);
 
-        foreach($dataMultiple->colaboradores as $colaborador){
-            $mensaje = str_replace("%nombre%", $colaborador->nombre . " ". $colaborador->a_paterno
-                                    ,$dataMultiple->mensaje);
-            $numero = trim("+521".$colaborador->telefono);
-            $twilio->sendmessage($numero,
-                                "+17372105610",$mensaje);
-        }
+        
 
-        $resp["data"] = "Enviado con exito";
+        $resp["data"] = $colaborador;
 
         return $this->respond($resp);        
     }
 
+    public function datos()
+	{
+        $colaboradorModel = new ColaboradorModel();
+		$resp["data"]=$colaboradorModel->getDatos($this->request->getVar('idColaborador'));
+        var_dump($resp["data"]);
+		return $this->respond($resp);
+	}
+
+    public function zonasLaborales()
+	{
+        $zonaModel = new ZonaModel();
+		$resp["data"]=$zonaModel->getZonasColaborador($this->request->getVar('idColaborador'));
+		return $this->respond($resp);
+	}
 }

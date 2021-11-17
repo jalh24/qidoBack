@@ -9,7 +9,7 @@ class Twilio {
 
     public function __construct()
     {
-        $this->twilio = new Client('AC0eca2bcad17a52375fa9e34b56c519cc', 'ea667e883c9eb394c361b2b4368c77dd');
+        $this->twilio = new Client('AC0eca2bcad17a52375fa9e34b56c519cc', 'cd31310a462743de97303f5b633d4526');
     }
 
 
