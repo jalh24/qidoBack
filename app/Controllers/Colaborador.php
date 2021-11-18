@@ -411,6 +411,7 @@ class Colaborador extends BaseController
                 'idBanco'  => $cuenta1->banco->idBanco,
                 'beneficiario' => $cuenta1->nombre,
                 'numero'  => $cuenta1->numero,
+                'comprobantePago'  => $cuenta1->comprobantePago,
                 'tipoCuenta' => $cuenta1->tipoCuenta
             ];
             $cuentaColaboradorModel->insert_data($cuenta);
