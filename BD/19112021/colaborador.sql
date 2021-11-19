@@ -1,1 +1,2 @@
 ALTER TABLE `colaborador` ADD `referenciaDireccion` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL AFTER `noInt`;
+ALTER TABLE `colaborador` ADD `curp` VARCHAR(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL AFTER `rfc`;
