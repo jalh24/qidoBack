@@ -1,0 +1,1 @@
+ALTER TABLE `cuentacolaborador` ADD `comprobantePago` BLOB NULL DEFAULT NULL AFTER `tipoCuenta`;

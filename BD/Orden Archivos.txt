@@ -1,0 +1,65 @@
+Orden
+Para la instalación se tienen que ejecutar los archivos en el siguiente orden
+Estructura/ES_banco.sql
+Estructura/ES_calificacion.sql
+Estructura/ES_pais.sql
+Estructura/ES_estado.sql
+Estructura/ES_ciudad.sql
+Estructura/ES_cliente.sql
+Estructura/ES_colonia.sql
+Estructura/ES_estadocivilcat.sql
+Estructura/ES_estatus.sql
+Estructura/ES_sexocat.sql
+Estructura/ES_tezcat.sql
+Estructura/ES_colaborador.sql
+Estructura/ES_colaboradorzona.sql
+Estructura/ES_complexiones.sql
+Estructura/ES_contactocliente.sql
+Estructura/ES_parentescocat.sql
+Estructura/ES_contactocolaborador.sql
+Estructura/ES_cuentacolaborador.sql
+Estructura/ES_especialidad.sql
+Estructura/ES_estudio.sql
+Estructura/ES_experiencia.sql
+Estructura/ES_habilidad.sql
+Estructura/ES_permanencia.sql
+Estructura/ES_tipocliente.sql
+Estructura/ES_tipocolaborador.sql
+Estructura/ES_tipotelefono.sql
+Estructura/ES_tipovisa.sql
+Estructura/ES_ultimogradoestudios.sql
+Estructura/ES_zonalaboral.sql
+Carga Inicial/CI_banco.sql
+Carga Inicial/CI_calificacion.sql
+Carga Inicial/CI_pais.sql
+Carga Inicial/CI_estado.sql
+Carga Inicial/CI_ciudad.sql
+Carga Inicial/CI_cliente.sql
+Carga Inicial/CI_colonia.sql
+Carga Inicial/CI_estadocivilcat.sql
+Carga Inicial/CI_estatus.sql
+Carga Inicial/CI_sexocat.sql
+Carga Inicial/CI_tezcat.sql
+Carga Inicial/CI_colaborador.sql
+Carga Inicial/CI_colaboradorzona.sql
+Carga Inicial/CI_complexiones.sql
+Carga Inicial/CI_contactocliente.sql
+Carga Inicial/CI_parentescocat.sql
+Carga Inicial/CI_contactocolaborador.sql
+Carga Inicial/CI_cuentacolaborador.sql
+Carga Inicial/CI_especialidad.sql
+Carga Inicial/CI_estudio.sql
+Carga Inicial/CI_experiencia.sql
+Carga Inicial/CI_habilidad.sql
+Carga Inicial/CI_permanencia.sql
+Carga Inicial/CI_tipocliente.sql
+Carga Inicial/CI_tipocolaborador.sql
+Carga Inicial/CI_tipotelefono.sql
+Carga Inicial/CI_tipovisa.sql
+Carga Inicial/CI_ultimogradoestudios.sql
+Carga Inicial/CI_zonalaboral.sql
+19112021/colaboradorservicio.sql
+19112021/responsable.sql
+19112021/servicio.sql
+19112021/colaborador.sql
+19112021/cuentacolaborador.sql
