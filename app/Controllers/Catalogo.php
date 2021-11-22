@@ -31,6 +31,13 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function colaboradoresCurp()
+	{
+		$catalogoModel = new CatalogoModel();	
+        $resp["data"]=$catalogoModel->getColaboradoresCurp();
+		return $this->respond($resp);
+	}
+
 	public function servicioColaboradoresFiltro()
 	{
 		$catalogoModel = new CatalogoModel();	

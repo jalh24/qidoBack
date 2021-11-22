@@ -26,6 +26,11 @@ class CatalogoModel extends Model
   public function getColaboradores() { 
     $query = $this->db->query('select idColaborador, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from colaborador');
     return $query->getResult();
+  }
+
+  public function getColaboradoresCurp() { 
+    $query = $this->db->query('select idColaborador, curp from colaborador');
+    return $query->getResult();
   } 
 
   public function getServicioColaboradoresFiltro() { 
