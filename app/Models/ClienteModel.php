@@ -23,5 +23,8 @@ class ClienteModel extends Model
     $query = $this->db->query('select * from ' . $this->table . '');
     return $query->getResult();
   } 
-
+  public function getClienteId($clienteFiltro) {   
+    $query = $this->db->query('select * from ' . $this->table . ' where idCliente =  '. $clienteFiltro);
+    return $query->getResult();
+  } 
 }
