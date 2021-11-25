@@ -229,7 +229,7 @@ public function insert_data($data = array())
   }
   
   public function getColaboradorId($colaboradorFiltro) { 
-    $filter = ' inner join colaboradorzona colabzona on colab.idColaborador = colabzona.idColaborador';
+    $filter = ' left join colaboradorzona colabzona on colab.idColaborador = colabzona.idColaborador';
     $filter = $filter . ' left join calificacion calificacionConId on colab.idCalificacion = calificacionConId.idCalificacion';
     $filter = $filter . ' left join tipocolaborador tipoColaboradorConId on colab.idTipoColaborador = tipoColaboradorConId.idTipoColaborador';
     $filter = $filter . ' left join pais paisNacimiento on colab.idPaisNacimiento = paisNacimiento.idPais';

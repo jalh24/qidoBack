@@ -1,34 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Nov 19, 2021 at 05:59 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.10
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `qido`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `servicio`
---
-
 CREATE TABLE `servicio` (
-  `idServicio` int(11) NOT NULL,
+  `idServicio` int(11) NOT NULL AUTO_INCREMENT,
   `cliente` int(11) DEFAULT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   `a_paterno` varchar(50) DEFAULT NULL,
@@ -74,51 +45,18 @@ CREATE TABLE `servicio` (
   `cantidadPorPagar` decimal(10,2) DEFAULT NULL,
   `colabReq` int(11) DEFAULT NULL,
   `estatus` varchar(45) DEFAULT NULL,
-  `fechaCreacion` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `servicio`
---
-ALTER TABLE `servicio`
-  ADD PRIMARY KEY (`idServicio`),
-  ADD KEY `servicio_sexo_idx` (`idSexo`),
-  ADD KEY `servicio_esciv_idx` (`idEstadoCivil`),
-  ADD KEY `servicio_pais_idx` (`idPais`),
-  ADD KEY `servicio_estado_idx` (`idEstado`),
-  ADD KEY `servicio_ciudad_idx` (`idCiudad`),
-  ADD KEY `servicio_colonia_idx` (`idColonia`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `servicio`
---
-ALTER TABLE `servicio`
-  MODIFY `idServicio` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `servicio`
---
-ALTER TABLE `servicio`
-  ADD CONSTRAINT `servicio_ciudad` FOREIGN KEY (`idCiudad`) REFERENCES `ciudad` (`idCiudad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `servicio_colonia` FOREIGN KEY (`idColonia`) REFERENCES `colonia` (`idColonia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `servicio_esciv` FOREIGN KEY (`idEstadoCivil`) REFERENCES `estadocivilcat` (`idEstadoCivil`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `servicio_estado` FOREIGN KEY (`idEstado`) REFERENCES `estado` (`idEstado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `servicio_pais` FOREIGN KEY (`idPais`) REFERENCES `pais` (`idPais`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `servicio_sexo` FOREIGN KEY (`idSexo`) REFERENCES `sexocat` (`idSexo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  `fechaCreacion` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`idServicio`),
+  KEY `servicio_sexo_idx` (`idSexo`),
+  KEY `servicio_esciv_idx` (`idEstadoCivil`),
+  KEY `servicio_pais_idx` (`idPais`),
+  KEY `servicio_estado_idx` (`idEstado`),
+  KEY `servicio_ciudad_idx` (`idCiudad`),
+  KEY `servicio_colonia_idx` (`idColonia`),
+  CONSTRAINT `servicio_ciudad` FOREIGN KEY (`idCiudad`) REFERENCES `ciudad` (`idCiudad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `servicio_colonia` FOREIGN KEY (`idColonia`) REFERENCES `colonia` (`idColonia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `servicio_esciv` FOREIGN KEY (`idEstadoCivil`) REFERENCES `estadocivilcat` (`idEstadoCivil`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `servicio_estado` FOREIGN KEY (`idEstado`) REFERENCES `estado` (`idEstado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `servicio_pais` FOREIGN KEY (`idPais`) REFERENCES `pais` (`idPais`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `servicio_sexo` FOREIGN KEY (`idSexo`) REFERENCES `sexocat` (`idSexo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
