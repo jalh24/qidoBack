@@ -133,7 +133,7 @@ public function insert_data($data = array())
     //  $filter . ' LIMIT '.$colaboradorFiltro->start.','. $colaboradorFiltro->limit);
    
 
-    $query = $this->db->query('select DISTINCT colab.* from ' . $this->table . ' colab '.
+    $query = $this->db->query('select DISTINCT colab.*, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from ' . $this->table . ' colab '.
                               $filter . ' LIMIT '.$colaboradorFiltro->start.','. $colaboradorFiltro->limit);
     return $query->getResult();
   } 

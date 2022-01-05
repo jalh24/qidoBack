@@ -1,0 +1,1 @@
+INSERT INTO `banco` (`idBanco`, `nombre`) VALUES ('93', 'OXXO');
