@@ -19,7 +19,12 @@ class CatalogoModel extends Model
   } 
 
   public function getClientes() { 
-    $query = $this->db->query('select idCliente, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from cliente');
+    $query = $this->db->query('select idCliente, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto, nombre,a_paterno,a_materno from cliente');
+    return $query->getResult();
+  }
+
+  public function getClientesById($cliente) { 
+    $query = $this->db->query('select * from cliente where idCliente='.$cliente);
     return $query->getResult();
   }
 

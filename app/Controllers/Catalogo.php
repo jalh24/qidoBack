@@ -24,6 +24,13 @@ class Catalogo extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function clientesById()
+	{
+		$catalogoModel = new CatalogoModel();	
+		$resp["data"]=$catalogoModel->getClientesById($this->request->getVar('idCliente'));
+		return $this->respond($resp);
+	}
+
 	public function colaboradores()
 	{
 		$catalogoModel = new CatalogoModel();	
