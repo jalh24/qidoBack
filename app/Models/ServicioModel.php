@@ -38,7 +38,7 @@ public function insert_data($data = array())
   }
 
   public function getServicios($servicioFiltro) {
-    $filter = ' where idServicio > 0 ';
+    $filter = ' where serv.idServicio > 0 ';
     if(!empty($servicioFiltro)) {
       if(!empty($servicioFiltro->fecha1) && !empty($servicioFiltro->fecha2)) {
         $fecha1Conv = strtotime($servicioFiltro->fecha1);
@@ -65,8 +65,11 @@ public function insert_data($data = array())
     //  var_dump('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y") AS formatoFecha, CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno) as nombrecompletocolab from ' . $this->table . ' serv ' . ' left join colaborador colab on colab.idColaborador = serv.colaborador '.
     //  $filter);
 
-    $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y") AS formatoFecha, resp.nombre as nombreResp from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable '.
-                              $filter. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
+    // $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y") AS formatoFecha, resp.nombre as nombreResp from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable '.
+    //                           $filter. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
+
+    $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS("",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y ") AS formatoFecha, resp.nombre as nombreResp, colabs.idColaborador as idColaborador, CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno) as nombrecompletocolab from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable left join colaboradorservicio colabs on colabs.idServicio = serv.idServicio left join colaborador colab on colab.idColaborador = colabs.idColaborador '.
+                              $filter. ' order by serv.idServicio asc '. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
 
     return $query->getResult();
   }
