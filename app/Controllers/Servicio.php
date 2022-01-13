@@ -23,6 +23,18 @@ class Servicio extends BaseController
         return $this->respond($resp);
     }
 
+    public function lista1()
+    {
+        $json = file_get_contents('php://input');
+        $dataServicio = json_decode($json);
+        $servicioModel = new ServicioModel();
+        $servicios = $servicioModel->getServicios1($dataServicio);
+        
+        $resp["data"]=$servicios;
+        $resp["count"] =$servicioModel->getServiciosNums($dataServicio)[0];
+        return $this->respond($resp);
+    }
+
     // create
     public function create() {
         $servicioModel = new ServicioModel();

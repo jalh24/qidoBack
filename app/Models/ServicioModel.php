@@ -65,10 +65,47 @@ public function insert_data($data = array())
     //  var_dump('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y") AS formatoFecha, CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno) as nombrecompletocolab from ' . $this->table . ' serv ' . ' left join colaborador colab on colab.idColaborador = serv.colaborador '.
     //  $filter);
 
+    $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y") AS formatoFecha, resp.nombre as nombreResp from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable '.
+                              $filter. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
+
+    // $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y ") AS formatoFecha, resp.nombre as nombreResp, colabs.idColaborador as idColaborador, CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno) as nombrecompletocolab from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable left join colaboradorservicio colabs on colabs.idServicio = serv.idServicio left join colaborador colab on colab.idColaborador = colabs.idColaborador '.
+    //                           $filter. ' order by serv.idServicio asc '. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
+
+    return $query->getResult();
+  }
+
+  public function getServicios1($servicioFiltro) {
+    $filter = ' where serv.idServicio > 0 ';
+    if(!empty($servicioFiltro)) {
+      if(!empty($servicioFiltro->fecha1) && !empty($servicioFiltro->fecha2)) {
+        $fecha1Conv = strtotime($servicioFiltro->fecha1);
+        $fecha1new = date('Y-m-d',$fecha1Conv);
+        $fecha2Conv = strtotime($servicioFiltro->fecha2);
+        $fecha2new = date('Y-m-d',$fecha2Conv);
+        $filter = $filter . ' and (serv.fechaCreacion between \'' . $fecha1new . '\' and \'' . $fecha2new .'\' ) ';
+      }
+      // if(!empty($servicioFiltro->colaboradores)){
+      //   // $filter = $filter . ' and atiendeCovid= ' . $colaboradorFiltro->atiendeCovid;
+      //   // $col = json_decode($servicioFiltro->colaboradores[1]);
+      //   // $col = implode(",",$servicioFiltro->colaboradores);
+      //   // var_dump($servicioFiltro->colaboradores[0]->nombrecompleto);
+      //   $filter = $filter . ' and CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno)= \'' . $servicioFiltro->colaboradores[0]->nombrecompleto.'\'';
+      // }
+      if(!empty($servicioFiltro->responsables)) {
+        $filter = $filter . ' and serv.idResponsable= ' . $servicioFiltro->responsables[0]->idResponsable;
+      }
+      if(!empty($servicioFiltro->estatus)) {
+        $filter = $filter . ' and estatus= \'' . $servicioFiltro->estatus.'\'';
+      }
+  }
+    
+    //  var_dump('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y") AS formatoFecha, CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno) as nombrecompletocolab from ' . $this->table . ' serv ' . ' left join colaborador colab on colab.idColaborador = serv.colaborador '.
+    //  $filter);
+
     // $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y") AS formatoFecha, resp.nombre as nombreResp from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable '.
     //                           $filter. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
 
-    $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS("",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y ") AS formatoFecha, resp.nombre as nombreResp, colabs.idColaborador as idColaborador, CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno) as nombrecompletocolab from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable left join colaboradorservicio colabs on colabs.idServicio = serv.idServicio left join colaborador colab on colab.idColaborador = colabs.idColaborador '.
+    $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y ") AS formatoFecha, resp.nombre as nombreResp, colabs.idColaborador as idColaborador, CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno) as nombrecompletocolab from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable left join colaboradorservicio colabs on colabs.idServicio = serv.idServicio left join colaborador colab on colab.idColaborador = colabs.idColaborador '.
                               $filter. ' order by serv.idServicio asc '. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
 
     return $query->getResult();
