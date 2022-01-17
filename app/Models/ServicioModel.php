@@ -111,6 +111,11 @@ public function insert_data($data = array())
     return $query->getResult();
   }
 
+  public function getServicios2() { 
+    $query = $this->db->query('select *, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from servicio');
+    return $query->getResult();
+  } 
+
   public function getServiciosNums($servicioFiltro) {
     $filter = ' where idServicio > 0 ';
     if(!empty($servicioFiltro)) {

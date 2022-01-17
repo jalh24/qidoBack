@@ -35,6 +35,13 @@ class Servicio extends BaseController
         return $this->respond($resp);
     }
 
+    public function lista2()
+	{
+        $servicioModel = new ServicioModel();
+        $resp["data"]=$servicioModel->getServicios2();
+		return $this->respond($resp);
+	}
+
     // create
     public function create() {
         $servicioModel = new ServicioModel();
