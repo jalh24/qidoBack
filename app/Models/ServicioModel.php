@@ -23,7 +23,7 @@ public function insert_data($data = array())
   }
 
   public function getDatos($dato) { 
-    $query = $this->db->query('select * from servicio where idServicio='.$dato);
+    $query = $this->db->query('select *, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from servicio where idServicio='.$dato);
     return $query->getResult();
   }
 

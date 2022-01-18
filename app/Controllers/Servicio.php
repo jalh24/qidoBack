@@ -243,6 +243,72 @@ class Servicio extends BaseController
       return $this->respond($response);
     }
 
+    // update pago
+    public function updatePago($id = null){
+        $servicioModel = new ServicioModel();
+        $json = file_get_contents('php://input');
+        $dataServicio = json_decode($json);
+        $id = $this->request->getVar('idServicio');
+        $data = [
+            'cliente'  => $dataServicio->cliente,
+            'nombre'  => $dataServicio->nombre,
+            'a_paterno'  => $dataServicio->a_paterno,
+            'a_materno'  => $dataServicio->a_materno,
+            'fecha_nacimiento'  => $dataServicio->fecha_nacimiento,
+            'idPaisNacimiento'  => $dataServicio->idPaisNacimiento,
+            'idEstadoNacimiento'  => $dataServicio->idEstadoNacimiento,
+            'idCiudadNacimiento'  => $dataServicio->idCiudadNacimiento,
+            'calle1'  => $dataServicio->calle1,
+            'calle2'  => $dataServicio->calle2,
+            'noExt'  => $dataServicio->noExt,
+            'noInt'  => $dataServicio->noInt,
+            'codigoPostal'  => $dataServicio->codigoPostal,
+            'idColonia'  => $dataServicio->idColonia,
+            'idCiudad'  => $dataServicio->idCiudad,
+            'idEstado'  => $dataServicio->idEstado,
+            'idPais'  => $dataServicio->idPais,
+            'referenciaDireccion'  => $dataServicio->referenciaDireccion,
+            'idSexo'  => $dataServicio->idSexo,
+            'idComplexion'  => $dataServicio->idComplexion,
+            'peso'  => $dataServicio->peso,
+            'estatura'  => $dataServicio->estatura,
+            'idEstadoCivil'  => $dataServicio->idEstadoCivil,
+            'telefono'  => $dataServicio->telefono,
+            'idTipoTelefono'  => $dataServicio->idTipoTelefono,
+            'correoElectronico'  => $dataServicio->correoElectronico,
+            'idParentesco'  => $dataServicio->idParentesco,
+            'nombreMedico'  => $dataServicio->nombreMedico,
+            'especialidadMedico'  => $dataServicio->especialidadMedico,
+            'telefonoMedico'  => $dataServicio->telefonoMedico,
+            'correoElectronicoMedico'  => $dataServicio->correoElectronicoMedico,
+            'enfermedades'  => $dataServicio->enfermedades,
+            'procedimientos'  => $dataServicio->procedimientos,
+            'medicamentos'  => $dataServicio->medicamentos,
+            'notas'  => $dataServicio->notas,
+            'tieneCovid'  => intval($dataServicio->tieneCovid),
+            'tieneAlzheimer'  => intval($dataServicio->tieneAlzheimer),
+            'movimiento'  => intval($dataServicio->movimiento),
+            'idTipoServicio'  => $dataServicio->idTipoServicio,
+            'idResponsable'  => $dataServicio->idResponsable,
+            'precioServicio'  => $dataServicio->precioServicio,
+            'cantidadPagada'  => $dataServicio->cantidadPagada,
+            'cantidadPorPagar'  => $dataServicio->cantidadPorPagar,
+            'colabReq'  => $dataServicio->colabReq,
+            'estatus'  => $dataServicio->estatus
+        ];
+
+        $servicioModel->update_data($id, $data);
+
+        $response = [
+          'status'   => 200,
+          'error'    => null,
+          'messages' => [
+              'success' => 'Pago Actualizado'
+          ]
+      ];
+      return $this->respond($response);
+    }
+
     public function datos()
 	{
 		$servicioModel = new ServicioModel();	
