@@ -11,6 +11,19 @@ class Pago extends BaseController
 {
 	use ResponseTrait;
 
+    public function index()
+	{
+        
+        $json = file_get_contents('php://input');
+        $dataPago = json_decode($json);
+		$pagoModel = new PagoModel();
+		$pagos = $pagoModel->getPagos($dataPago);
+		
+		
+        $resp["data"]=$pagos;
+       // $resp["count"] =$pagoModel->getPagosNums($dataPago)[0];
+		return $this->respond($resp);
+	}
     // create
     public function create() {
         $pagoModel = new PagoModel();
