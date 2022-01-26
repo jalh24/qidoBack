@@ -33,9 +33,12 @@ public function insert_data($data = array())
         $fecha2new = date('Y-m-d',$fecha2Conv);
         $filter = $filter . ' and (pag.fechaPago between \'' . $fecha1new . '\' and \'' . $fecha2new .'\' ) ';
       }
+      if(!empty($pagoFiltro->pacientes)) {
+        $filter = $filter . ' and ser.cliente= ' . $pagoFiltro->pacientes[0]->cliente;
+      }
     }
  //   $query = $this->db->query('select * from ' . $this->table . '');
- $query = $this->db->query('select DISTINCT pag.*, DATE_FORMAT(pag.fechaPago,"%d/%m/%Y") AS formatoFecha  from '.$this->table .' pag ' .
+ $query = $this->db->query('select DISTINCT pag.*, ser.cliente, CONCAT_WS(" ",ser.nombre,ser.a_paterno,ser.a_materno) as nombrecompleto, DATE_FORMAT(pag.fechaPago,"%d/%m/%Y") AS formatoFecha  from '.$this->table .' pag inner join servicio ser on pag.idServicio=ser.idServicio' .
                               $filter. ' LIMIT '.$pagoFiltro->start.','. $pagoFiltro->limit);
 
     return $query->getResult();
