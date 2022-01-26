@@ -41,4 +41,30 @@ public function insert_data($data = array())
     return $query->getResult();
   } 
 
+  public function getPagosNums($pagoFiltro) {
+    $filter = ' where idPagoServicio > 0 ';
+    if(!empty($pagoFiltro)) {
+      if(!empty($pagoFiltro->fecha1) && !empty($pagoFiltro->fecha2)) {
+        $fecha1Conv = strtotime($pagoFiltro->fecha1);
+        $fecha1new = date('Y-m-d',$fecha1Conv);
+        $fecha2Conv = strtotime($pagoFiltro->fecha2);
+        $fecha2new = date('Y-m-d',$fecha2Conv);
+        $filter = $filter . ' and (pag.fechaCreacion between \'' . $fecha1new . '\' and \'' . $fecha2new .'\' ) ';
+      }
+      // if(!empty($pagoFiltro->colaboradores)){
+      //   // $filter = $filter . ' and atiendeCovid= ' . $colaboradorFiltro->atiendeCovid;
+      //   // $col = json_decode($pagoFiltro->colaboradores[1]);
+      //   // $col = implode(",",$pagoFiltro->colaboradores);
+      //   // var_dump($pagoFiltro->colaboradores[0]->nombrecompleto);
+      //   $filter = $filter . ' and CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno)= \'' . $pagoFiltro->colaboradores[0]->nombrecompleto.'\'';
+      // }
+      if(!empty($pagoFiltro->estatus)) {
+        $filter = $filter . ' and estatus= \'' . $pagoFiltro->estatus.'\'';
+      }
+  }
+                                
+    $query = $this->db->query('select count(DISTINCT pag.idPagoServicio) total from ' . $this->table . ' pag '.
+                              $filter);
+    return $query->getResult();
+  }
 }
