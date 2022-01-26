@@ -49,7 +49,7 @@ public function insert_data($data = array())
         $fecha1new = date('Y-m-d',$fecha1Conv);
         $fecha2Conv = strtotime($pagoFiltro->fecha2);
         $fecha2new = date('Y-m-d',$fecha2Conv);
-        $filter = $filter . ' and (pag.fechaCreacion between \'' . $fecha1new . '\' and \'' . $fecha2new .'\' ) ';
+        $filter = $filter . ' and (pag.fechaPago between \'' . $fecha1new . '\' and \'' . $fecha2new .'\' ) ';
       }
       // if(!empty($pagoFiltro->colaboradores)){
       //   // $filter = $filter . ' and atiendeCovid= ' . $colaboradorFiltro->atiendeCovid;
