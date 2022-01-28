@@ -6,20 +6,40 @@ use Twilio\Rest\Client;
 
 class Twilio {
     private $twilio;
-
+    private $number;
     public function __construct()
     {
-        $this->twilio = new Client('XXX', 'XXX');
+        $this->twilio = new Client('xx', 'xx');
+        $this->number ="whatsapp:+5218141700xxx";
     }
 
-
+    /**
+    Envio de mensajes customizados
+    **/
     public function sendmessage($recipient_number, $sender_number, $message)
     {
         $result = $this->twilio->messages
                   ->create("whatsapp:".$recipient_number, // to
                            array(
-                               "from" => "whatsapp:".$sender_number,
-                               "body" =>  $message
+                               "from" => $this->number,
+                               "body" =>  $message,
+                               "mediaUrl"=>["https://i0.wp.com/qido.mx/wp-content/uploads/elementor/thumbs/final-C-1-oqtordmw9wbz4gl9m92smr3inmbur0l8gwhukog03u.png"]
+                           )
+                  );
+        $return = $this->preparereturndata($result);
+        return $return;
+    }
+
+    /**
+    Envios de mensajes templates de twilio
+    **/
+    public function sendFirstMessage($recipient_number)
+    {
+        $result = $this->twilio->messages
+                  ->create("whatsapp:".$recipient_number, // to
+                           array(
+                               "from" => $this->number,
+                               "body" =>  'Hola, tienes una oferta de servicio de Q.ido / Cuidadores y Enfermeras a Domicilio, si te interesa saber más responde con un *Si*'
                            )
                   );
         $return = $this->preparereturndata($result);
