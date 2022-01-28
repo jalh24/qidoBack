@@ -21,7 +21,7 @@ class Pago extends BaseController
 		
 		
         $resp["data"]=$pagos;
-       // $resp["count"] =$pagoModel->getPagosNums($dataPago)[0];
+        $resp["count"] =$pagoModel->getPagosNums($dataPago)[0];
 		return $this->respond($resp);
 	}
     // create
