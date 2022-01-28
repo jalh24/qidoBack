@@ -29,6 +29,7 @@ class Cliente extends BaseController
         $clienteModel = new ClienteModel();
         $json = file_get_contents('php://input');
         $dataCliente = json_decode($json);
+        var_dump($dataCliente);
         $data = [
             'nombre'  => $dataCliente->nombre,
             'a_paterno'  => $dataCliente->a_paterno,
@@ -48,13 +49,13 @@ class Cliente extends BaseController
             'idPais'  => $dataCliente->idPais,
             'codigoPostal'  => $dataCliente->codigoPostal,
             'referencia'=> $dataCliente->referencia,
-            'idSexo'  => $dataCliente->idSexo,
-            'imss'  => $dataCliente->imss,
+            'idSexo'  => $dataCliente->idSexo,    
             'sgmm'  => $dataCliente->sgmm,           
             'idComplexion'  => $dataCliente->idComplexion,
             'peso'  => $dataCliente->peso,
             'estatura'  => $dataCliente->estatura,
             'idEstadoCivil'  => $dataCliente->idEstadoCivil,
+            'imss'  => $dataCliente->imss,
             'telefono'  => $dataCliente->telefono,
             'idTipoTelefono'  => $dataCliente->idTipoTelefono,
             'telefono2'  => $dataCliente->telefono2,
@@ -92,10 +93,10 @@ class Cliente extends BaseController
 
         foreach($contactosClienteList as $contacto1){            
             $contacto = [
-                'idCliente'=>$cliente,
+               'idCliente'=>$cliente,
                 'nombre'  => $contacto1->nombre,
                 'idParentesco' =>$contacto1->parentesco->idParentesco,
-                'telefono'  => $contacto1->telefono,
+                'telefono'  => $contacto1->telefonoContacto,
                 'idTipoTelefono'  => $contacto1->tipoTelefono->idTipoTel,
                 'correoElectronico'  => $contacto1->correoElectronico    
             ];
@@ -136,12 +137,13 @@ class Cliente extends BaseController
             'codigoPostal'  => $this->request->getVar('codigoPostal'),          
             'referencia'  => $this->request->getVar('referencia'),
             'idSexo'  => $this->request->getVar('idSexo'),
-            'imss'  => $this->request->getVar('imss'), 
+          
             'sgmm'  => $this->request->getVar('sgmm'),
             'idComplexion'  => $this->request->getVar('idComplexion'),
             'peso'  => $this->request->getVar('peso'),
             'estatura'  => $this->request->getVar('estatura'),
             'idEstadoCivil'  => $this->request->getVar('idEstadoCivil'),
+            'imss'  => $this->request->getVar('imss'), 
             'telefono'  => $this->request->getVar('telefono'),
             'idTipoTelefono'  => $this->request->getVar('idTipoTelefono'),
             'telefono2'  => $this->request->getVar('telefono2'),
