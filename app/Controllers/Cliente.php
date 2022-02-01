@@ -29,7 +29,6 @@ class Cliente extends BaseController
         $clienteModel = new ClienteModel();
         $json = file_get_contents('php://input');
         $dataCliente = json_decode($json);
-        var_dump($dataCliente);
         $data = [
             'nombre'  => $dataCliente->nombre,
             'a_paterno'  => $dataCliente->a_paterno,
