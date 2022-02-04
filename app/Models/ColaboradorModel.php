@@ -51,6 +51,7 @@ public function insert_data($data = array())
     
     if(!empty($colaboradorFiltro)){
 
+     
       if(!empty($colaboradorFiltro->genero)){
         $filter = $filter . ' and idSexo= ' . $colaboradorFiltro->genero;
       }
@@ -65,6 +66,9 @@ public function insert_data($data = array())
       }
       if(!empty($colaboradorFiltro->antecedentePenales)){
         $filter = $filter . ' and antecedentePenales= ' . $colaboradorFiltro->antecedentePenales;
+      }
+      if(!empty($colaboradorFiltro->nombre)){
+        $filter = $filter . ' and nombre= ' . $colaboradorFiltro->nombre;
       }
       if(!empty($colaboradorFiltro->autoPropio)){
         $filter = $filter . ' and autoPropio= ' . $colaboradorFiltro->autoPropio;
@@ -145,6 +149,7 @@ public function insert_data($data = array())
       $filter = ' where idColaborador > 0 ';  
     }
 
+    
     if(!empty($colaboradorFiltro->genero)){
       $filter = $filter . ' and idSexo= ' . $colaboradorFiltro->genero;
     }
@@ -156,6 +161,9 @@ public function insert_data($data = array())
     }
     if(!empty($colaboradorFiltro->antecedentePenales)){
       $filter = $filter . ' and antecedentePenales= ' . $colaboradorFiltro->antecedentePenales;
+    }
+    if(!empty($colaboradorFiltro->nombre)){
+      $filter = $filter . ' and nombre= ' . $colaboradorFiltro->nombre;
     }
     if(!empty($colaboradorFiltro->autoPropio)){
       $filter = $filter . ' and autoPropio= ' . $colaboradorFiltro->autoPropio;
