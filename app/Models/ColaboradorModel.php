@@ -68,7 +68,7 @@ public function insert_data($data = array())
         $filter = $filter . ' and antecedentePenales= ' . $colaboradorFiltro->antecedentePenales;
       }
       if(!empty($colaboradorFiltro->nombre)){
-        $filter = $filter . ' and nombre= ' . $colaboradorFiltro->nombre;
+        $filter = $filter . ' and nombre LIKE \'' . $colaboradorFiltro->nombre . '\'';
       }
       if(!empty($colaboradorFiltro->autoPropio)){
         $filter = $filter . ' and autoPropio= ' . $colaboradorFiltro->autoPropio;
@@ -163,7 +163,7 @@ public function insert_data($data = array())
       $filter = $filter . ' and antecedentePenales= ' . $colaboradorFiltro->antecedentePenales;
     }
     if(!empty($colaboradorFiltro->nombre)){
-      $filter = $filter . ' and nombre= ' . $colaboradorFiltro->nombre;
+      $filter = $filter . ' and nombre LIKE \'' . $colaboradorFiltro->nombre . '\'';
     }
     if(!empty($colaboradorFiltro->autoPropio)){
       $filter = $filter . ' and autoPropio= ' . $colaboradorFiltro->autoPropio;
