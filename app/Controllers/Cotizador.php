@@ -46,5 +46,13 @@ class Cotizador extends BaseController
 		return $this->respond($resp);
 	}
 
+	public function datosCotizador()
+	{
+		$cotizadorModel = new CotizadorModel();	
+        $resp["polizas"]=$cotizadorModel->getPolizas();
+		$resp["pagosPersonal"]=$cotizadorModel->getPagosPersonal();
+		$resp["preciosCliente"]=$cotizadorModel->getPreciosCliente();
+		return $this->respond($resp);
+	}
 
 }

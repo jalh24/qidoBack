@@ -33,4 +33,19 @@ class CotizadorModel extends Model
     return $query->getResult();
   }
 
+  public function getPolizas() { 
+    $query = $this->db->query('select * from polizas');
+    return $query->getResult();
+  }
+
+  public function getPagosPersonal() { 
+    $query = $this->db->query('select * from pagospersonal');
+    return $query->getResult();
+  }
+
+  public function getPreciosCliente() { 
+    $query = $this->db->query('select * from precioscliente');
+    return $query->getResult();
+  }
+
 }
