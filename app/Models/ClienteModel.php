@@ -19,6 +19,14 @@ class ClienteModel extends Model
       return $this->db->insertID();
   }
 
+  public function update_data($id, $data = array())
+  {
+      $this->db->table($this->table)->update($data, array(
+          "idCliente" => $id,
+      ));
+      return $this->db->affectedRows();
+  }
+
   public function getClientes() { 
     $query = $this->db->query('select * from ' . $this->table . '');
     return $query->getResult();
