@@ -57,15 +57,21 @@ public function insert_data($data = array())
       if(!empty($servicioFiltro->responsables)) {
         $filter = $filter . ' and serv.idResponsable= ' . $servicioFiltro->responsables[0]->idResponsable;
       }
-      if(!empty($servicioFiltro->estatus)) {
-        $filter = $filter . ' and estatus= \'' . $servicioFiltro->estatus.'\'';
+      if(!empty($servicioFiltro->pacientes)) {
+        $filter = $filter . ' and serv.cliente= ' . $servicioFiltro->pacientes[0]->cliente;
+      }
+      if(!empty($servicioFiltro->estatusOperativo)) {
+        $filter = $filter . ' and serv.estatusOperativo= \'' . $servicioFiltro->estatusOperativo.'\'';
+      }
+      if(!empty($servicioFiltro->estatusPago)) {
+        $filter = $filter . ' and serv.estatusPago= \'' . $servicioFiltro->estatusPago.'\'';
       }
   }
     
     //  var_dump('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y") AS formatoFecha, CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno) as nombrecompletocolab from ' . $this->table . ' serv ' . ' left join colaborador colab on colab.idColaborador = serv.colaborador '.
     //  $filter);
 
-    $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y") AS formatoFecha, resp.nombre as nombreResp from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable '.
+    $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y") AS formatoFecha, resp.nombre as nombreResp, est.Nombre as estatusOperativoNombre, estp.Nombre as estatusPagoNombre from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable left join tipoestatusoperacion est on est.idTipoEstatusOperacion = serv.estatusOperativo left join tipoestatuspago estp on estp.idTipoEstatusPago=serv.estatusPago'.
                               $filter. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
 
     // $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y ") AS formatoFecha, resp.nombre as nombreResp, colabs.idColaborador as idColaborador, CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno) as nombrecompletocolab from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable left join colaboradorservicio colabs on colabs.idServicio = serv.idServicio left join colaborador colab on colab.idColaborador = colabs.idColaborador '.

@@ -33,7 +33,8 @@ class Pago extends BaseController
             'idServicio'  => $dataPago->idServicio,
             'monto'  => $dataPago->monto,
             'motivo'  => $dataPago->motivo,
-            'fechaPago' =>date('Y-m-d H:m:s')
+            'fechaPago' =>date('Y-m-d H:m:s'),
+            'estatusPago' => $dataPago->estatusPago,
         ];
 
         //Se crea el colaborador y regresa el id para sus relaciones

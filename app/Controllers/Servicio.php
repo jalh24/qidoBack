@@ -94,7 +94,10 @@ class Servicio extends BaseController
             'colabReq'  => $dataServicio->colabReq,
             'pagoColaborador'  => $dataServicio->pagoColaborador,
             'estatus'  => $dataServicio->estatus,
-            'fechaCreacion' =>date('Y-m-d H:m:s')
+            'fechaCreacion' =>date('Y-m-d H:m:s'),
+            'estatusOperativo'  => $dataServicio->estatusOperativo,
+            'estatusPago'  => $dataServicio->estatusPago,
+            'fechaTerminacion'  => $dataServicio->fechaTerminacion,
         ];
 
         //Se crea el colaborador y regresa el id para sus relaciones
@@ -175,7 +178,10 @@ class Servicio extends BaseController
             'colabReq'  => $dataServicio->colabReq,
             'pagoColaborador'  => $dataServicio->pagoColaborador,
             'estatus'  => $dataServicio->estatus,
-            'fechaCreacion' =>date('Y-m-d H:m:s')
+            'fechaCreacion' =>date('Y-m-d H:m:s'),
+            'estatusOperativo'  => $dataServicio->estatusOperativo,
+            'estatusPago'  => $dataServicio->estatusPago,
+            'fechaTerminacion'  => $dataServicio->fechaTerminacion,
         ];
 
         $servicioModel->update_data($id, $data);
@@ -297,7 +303,10 @@ class Servicio extends BaseController
             'cantidadPorPagar'  => $dataServicio->cantidadPorPagar,
             'colabReq'  => $dataServicio->colabReq,
             'pagoColaborador'  => $dataServicio->pagoColaborador,
-            'estatus'  => $dataServicio->estatus
+            'estatus'  => $dataServicio->estatus,
+            'estatusOperativo'  => $dataServicio->estatusOperativo,
+            'estatusPago'  => $dataServicio->estatusPago,
+            'fechaTerminacion'  => $dataServicio->fechaTerminacion,
         ];
 
         $servicioModel->update_data($id, $data);

@@ -36,9 +36,12 @@ public function insert_data($data = array())
       if(!empty($pagoFiltro->pacientes)) {
         $filter = $filter . ' and ser.cliente= ' . $pagoFiltro->pacientes[0]->cliente;
       }
+      if(!empty($pagoFiltro->estatusPago)) {
+        $filter = $filter . ' and est.idTipoEstatusPago= ' . $pagoFiltro->estatusPago;
+      }
     }
  //   $query = $this->db->query('select * from ' . $this->table . '');
- $query = $this->db->query('select DISTINCT pag.*, ser.cliente, CONCAT_WS(" ",ser.nombre,ser.a_paterno,ser.a_materno) as nombrecompleto, DATE_FORMAT(pag.fechaPago,"%d/%m/%Y") AS formatoFecha  from '.$this->table .' pag inner join servicio ser on pag.idServicio=ser.idServicio' .
+ $query = $this->db->query('select DISTINCT pag.*, ser.cliente, CONCAT_WS(" ",ser.nombre,ser.a_paterno,ser.a_materno) as nombrecompleto, DATE_FORMAT(pag.fechaPago,"%d/%m/%Y") AS formatoFecha, est.Nombre as estatusPagoNombre  from '.$this->table .' pag inner join servicio ser on pag.idServicio=ser.idServicio left join tipoestatuspago est on est.idTipoEstatusPago=pag.estatusPago' .
                               $filter. ' LIMIT '.$pagoFiltro->start.','. $pagoFiltro->limit);
 
     return $query->getResult();
