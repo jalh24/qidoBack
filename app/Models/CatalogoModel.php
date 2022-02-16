@@ -68,6 +68,16 @@ class CatalogoModel extends Model
     return $query->getResult();
   } 
 
+  public function getEstatusPago() { 
+    $query = $this->db->query('select * from tipoestatuspago');
+    return $query->getResult();
+  } 
+
+  public function getEstatusOperacion() { 
+    $query = $this->db->query('select * from tipoestatusoperacion');
+    return $query->getResult();
+  } 
+
   public function getTez() { 
     $query = $this->db->query('select * from tezcat');
     return $query->getResult();

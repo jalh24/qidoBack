@@ -92,6 +92,7 @@ class Servicio extends BaseController
             'cantidadPagada'  => $dataServicio->cantidadPagada,
             'cantidadPorPagar'  => $dataServicio->cantidadPorPagar,
             'colabReq'  => $dataServicio->colabReq,
+            'pagoColaborador'  => $dataServicio->pagoColaborador,
             'estatus'  => $dataServicio->estatus,
             'fechaCreacion' =>date('Y-m-d H:m:s')
         ];
@@ -172,6 +173,7 @@ class Servicio extends BaseController
             'cantidadPagada'  => $dataServicio->cantidadPagada,
             'cantidadPorPagar'  => $dataServicio->cantidadPorPagar,
             'colabReq'  => $dataServicio->colabReq,
+            'pagoColaborador'  => $dataServicio->pagoColaborador,
             'estatus'  => $dataServicio->estatus,
             'fechaCreacion' =>date('Y-m-d H:m:s')
         ];
@@ -294,6 +296,7 @@ class Servicio extends BaseController
             'cantidadPagada'  => $dataServicio->cantidadPagada,
             'cantidadPorPagar'  => $dataServicio->cantidadPorPagar,
             'colabReq'  => $dataServicio->colabReq,
+            'pagoColaborador'  => $dataServicio->pagoColaborador,
             'estatus'  => $dataServicio->estatus
         ];
 
