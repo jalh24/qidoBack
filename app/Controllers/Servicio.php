@@ -109,7 +109,8 @@ class Servicio extends BaseController
         foreach($asignacionColaboradorList as $colaborador1){            
             $colaborador = [
                 'idServicio'=>$idServicio,
-                'idColaborador'=>$colaborador1->idColaborador
+                'idColaborador'=>$colaborador1->idColaborador,
+                'sueldo'=>$colaborador1->sueldo
             ];
             
             $asignacionColaboradorModel->insert_data($colaborador);
@@ -206,7 +207,7 @@ class Servicio extends BaseController
         }
 
         foreach($colaboradoresBorrar as $colaboradorBorrar) {
-            $servicioModel->eliminarColaboradores($id,$colaboradoresBorrar);
+            $servicioModel->eliminarColaboradores($id,$colaboradorBorrar);
         }  
 
         $colaboradoresAntes = $servicioModel->getColaboradoresAntes($id);

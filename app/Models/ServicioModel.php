@@ -33,7 +33,7 @@ public function insert_data($data = array())
   }
 
   public function getDatosServColab($dato) { 
-    $query = $this->db->query('select colaboradorservicio.idColaborador, CONCAT_WS(" ",colaborador.nombre,colaborador.a_paterno,colaborador.a_materno) as nombrecompleto from servicio inner JOIN colaboradorservicio ON servicio.idServicio = colaboradorservicio.idServicio left join colaborador on colaborador.idColaborador = colaboradorservicio.idColaborador where servicio.idServicio='.$dato);
+    $query = $this->db->query('select colaboradorservicio.idColaborador, CONCAT_WS(" ",colaborador.nombre,colaborador.a_paterno,colaborador.a_materno) as nombrecompleto, colaboradorservicio.sueldo from servicio inner JOIN colaboradorservicio ON servicio.idServicio = colaboradorservicio.idServicio left join colaborador on colaborador.idColaborador = colaboradorservicio.idColaborador where servicio.idServicio='.$dato);
     return $query->getResult();
   }
 
@@ -159,19 +159,19 @@ public function insert_data($data = array())
 
   public function getColaboradoresAntes($idServicioColaborador) {
     
-    $query = $this->db->query('select colaboradorservicio.idColaborador, CONCAT_WS(" ",colaborador.nombre,colaborador.a_paterno,colaborador.a_materno) as nombrecompleto from servicio inner JOIN colaboradorservicio ON servicio.idServicio = colaboradorservicio.idServicio left join colaborador on colaborador.idColaborador = colaboradorservicio.idColaborador where servicio.idServicio=' . $idServicioColaborador);
+    $query = $this->db->query('select colaboradorservicio.idColaborador, CONCAT_WS(" ",colaborador.nombre,colaborador.a_paterno,colaborador.a_materno) as nombrecompleto, colaboradorservicio.sueldo from servicio inner JOIN colaboradorservicio ON servicio.idServicio = colaboradorservicio.idServicio left join colaborador on colaborador.idColaborador = colaboradorservicio.idColaborador where servicio.idServicio=' . $idServicioColaborador);
 
     return $query->getResult();
   }
 
   public function eliminarColaboradores($idServicioColaborador,$colabServ) {
 
-      $query = $this->db->query('delete from colaboradorservicio where idServicio=' . $idServicioColaborador . ' and idColaborador=' . $colaborador->idColaborador);
+      $query = $this->db->query('delete from colaboradorservicio where idServicio=' . $idServicioColaborador . ' and idColaborador=' . $colabServ->idColaborador);
   }
 
   public function agregarColaboradores($idServicioColaborador,$colabServ) {
 
-    $query = $this->db->query('insert into colaboradorservicio(idServicio,idColaborador) values (' . $idServicioColaborador . ' ,' . $colabServ->idColaborador . ')');
+    $query = $this->db->query('insert into colaboradorservicio(idServicio,idColaborador,sueldo) values (' . $idServicioColaborador . ' ,' . $colabServ->idColaborador . ' ,' . $colabServ->sueldo . ')');
   }
 //   public function delete_data($id)
 //   {
