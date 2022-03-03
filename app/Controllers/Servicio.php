@@ -110,7 +110,8 @@ class Servicio extends BaseController
             $colaborador = [
                 'idServicio'=>$idServicio,
                 'idColaborador'=>$colaborador1->idColaborador,
-                'sueldo'=>$colaborador1->sueldo
+                'sueldo'=>$colaborador1->sueldo,
+                'observacion'=>$colaborador1->observacion
             ];
             
             $asignacionColaboradorModel->insert_data($colaborador);
