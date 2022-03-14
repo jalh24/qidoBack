@@ -95,6 +95,7 @@ class Servicio extends BaseController
             'pagoColaborador'  => $dataServicio->pagoColaborador,
             'estatus'  => $dataServicio->estatus,
             'fechaCreacion' =>date('Y-m-d H:m:s'),
+            'semanaTerminacion'  => $dataServicio->semanaTerminacion,
             'estatusOperativo'  => $dataServicio->estatusOperativo,
             'estatusPago'  => $dataServicio->estatusPago,
             'fechaTerminacion'  => $dataServicio->fechaTerminacion,
@@ -181,6 +182,7 @@ class Servicio extends BaseController
             'pagoColaborador'  => $dataServicio->pagoColaborador,
             'estatus'  => $dataServicio->estatus,
             'fechaCreacion' =>date('Y-m-d H:m:s'),
+            'semanaTerminacion' => $dataServicio->semanaTerminacion,
             'estatusOperativo'  => $dataServicio->estatusOperativo,
             'estatusPago'  => $dataServicio->estatusPago,
             'fechaTerminacion'  => $dataServicio->fechaTerminacion,
@@ -307,6 +309,7 @@ class Servicio extends BaseController
             'pagoColaborador'  => $dataServicio->pagoColaborador,
             'estatus'  => $dataServicio->estatus,
             'estatusOperativo'  => $dataServicio->estatusOperativo,
+            'semanaTerminacion'  => $dataServicio->semanaTerminacion,
             'estatusPago'  => $dataServicio->estatusPago,
             'fechaTerminacion'  => $dataServicio->fechaTerminacion,
         ];
