@@ -72,7 +72,7 @@ public function insert_data($data = array())
     //  $filter);
 
     $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y") AS formatoFecha, resp.nombre as nombreResp, est.Nombre as estatusOperativoNombre, estp.Nombre as estatusPagoNombre from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable left join tipoestatusoperacion est on est.idTipoEstatusOperacion = serv.estatusOperativo left join tipoestatuspago estp on estp.idTipoEstatusPago=serv.estatusPago'.
-                              $filter. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
+                              $filter. ' order by serv.idServicio desc '. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
 
     // $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y ") AS formatoFecha, resp.nombre as nombreResp, colabs.idColaborador as idColaborador, CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno) as nombrecompletocolab from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable left join colaboradorservicio colabs on colabs.idServicio = serv.idServicio left join colaborador colab on colab.idColaborador = colabs.idColaborador '.
     //                           $filter. ' order by serv.idServicio asc '. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
@@ -112,7 +112,7 @@ public function insert_data($data = array())
     //                           $filter. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
 
     $query = $this->db->query('select DISTINCT serv.*, CONCAT_WS(" ",serv.nombre,serv.a_paterno,serv.a_materno) as nombrecompleto, DATE_FORMAT(serv.fechaCreacion,"%d/%m/%Y ") AS formatoFecha, resp.nombre as nombreResp, colabs.idColaborador as idColaborador, CONCAT_WS(" ",colab.nombre,colab.a_paterno,colab.a_materno) as nombrecompletocolab from ' . $this->table . ' serv ' . ' left join responsable resp on resp.idResponsable = serv.idResponsable left join colaboradorservicio colabs on colabs.idServicio = serv.idServicio left join colaborador colab on colab.idColaborador = colabs.idColaborador '.
-                              $filter. ' order by serv.idServicio asc '. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
+                              $filter. ' order by serv.idServicio desc '. ' LIMIT '.$servicioFiltro->start.','. $servicioFiltro->limit);
 
     return $query->getResult();
   }
