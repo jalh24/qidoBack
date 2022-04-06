@@ -1,38 +1,38 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\EstadoCuentaModel;
+use App\Models\EstadocuentaModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
-class EstadoCuenta extends BaseController
+class Estadocuenta extends BaseController
 {
 	use ResponseTrait;
 
     public function pacientes()
 	{
-        $estadoCuentaModel = new EstadoCuentaModel();
-        $resp["data"]=$estadoCuentaModel->getPacientes();
+        $estadocuentaModel = new EstadocuentaModel();
+        $resp["data"]=$estadocuentaModel->getPacientes();
 		return $this->respond($resp);
 	}
 
     
     // public function listaPacientes()
 	// {
-	// 	$estadoCuentaModel = new EstadoCuentaModel();
-	// 	$resp["data"]=$estadoCuentaModel->getListaPacientes($this->request->getVar('cliente'));
+	// 	$estadocuentaModel = new EstadocuentaModel();
+	// 	$resp["data"]=$estadocuentaModel->getListaPacientes($this->request->getVar('cliente'));
 	// 	return $this->respond($resp);
 	// }
 
 	public function listaPacientes()
     {
         $json = file_get_contents('php://input');
-        $dataEstadoCuenta = json_decode($json);
-        $estadoCuentaModel = new EstadoCuentaModel();
-        $dataEstadoCuenta = $estadoCuentaModel->getListaPacientes($dataEstadoCuenta);
+        $dataEstadocuenta = json_decode($json);
+        $estadocuentaModel = new EstadocuentaModel();
+        $dataEstadocuenta = $estadocuentaModel->getListaPacientes($dataEstadocuenta);
         
-        $resp["data"]=$dataEstadoCuenta;
-        // $resp["count"] =$estadoCuentaModel->getListaPacientesNums($dataEstadoCuenta)[0];
+        $resp["data"]=$dataEstadocuenta;
+        // $resp["count"] =$estadocuentaModel->getListaPacientesNums($dataEstadocuenta)[0];
         return $this->respond($resp);
     }
 

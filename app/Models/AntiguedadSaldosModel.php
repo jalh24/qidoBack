@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 use \Datetime;
 use \DateInterval;
 
-class AntiguedadSaldosModel extends Model
+class AntiguedadsaldosModel extends Model
 {
   protected $table = 'servicio';
   protected $db;
@@ -23,7 +23,7 @@ public function insert_data($data = array())
   }
 
   public function getDeudores() { 
-    $query = $this->db->query('select *, (DATEDIFF(NOW(), fechaCreacion)) AS diferenciaDias FROM servicio WHERE DATEDIFF(NOW(), fechaCreacion) >= 5 AND cantidadPorPagar > 0 ORDER BY cliente ASC');
+    $query = $this->db->query('select *, (DATEDIFF(NOW(), fechaCreacion)) AS diferenciaDias FROM servicio WHERE DATEDIFF(NOW(), fechaCreacion) >= 1 AND cantidadPorPagar > 0 ORDER BY cliente ASC');
     return $query->getResult();
   }
 

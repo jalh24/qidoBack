@@ -4,7 +4,7 @@ use CodeIgniter\Model;
 use \Datetime;
 use \DateInterval;
 
-class EstadoCuentaModel extends Model
+class EstadocuentaModel extends Model
 {
   protected $table = 'servicio';
   protected $db;
@@ -32,18 +32,18 @@ public function insert_data($data = array())
   //   return $query->getResult();
   // }
 
-  public function getListaPacientes($estadoCuentaFiltro) {
+  public function getListaPacientes($estadocuentaFiltro) {
     $filter = ' where serv.idServicio > 0 ';
-    if(!empty($estadoCuentaFiltro)) {
-      if(!empty($estadoCuentaFiltro->fecha1) && !empty($estadoCuentaFiltro->fecha2)) {
-        $fecha1Conv = strtotime($estadoCuentaFiltro->fecha1);
+    if(!empty($estadocuentaFiltro)) {
+      if(!empty($estadocuentaFiltro->fecha1) && !empty($estadocuentaFiltro->fecha2)) {
+        $fecha1Conv = strtotime($estadocuentaFiltro->fecha1);
         $fecha1new = date('Y-m-d',$fecha1Conv);
-        $fecha2Conv = strtotime($estadoCuentaFiltro->fecha2);
+        $fecha2Conv = strtotime($estadocuentaFiltro->fecha2);
         $fecha2new = date('Y-m-d',$fecha2Conv);
         $filter = $filter . ' and (serv.fechaCreacion between \'' . $fecha1new . '\' and \'' . $fecha2new .'\' ) ';
       }
-      if(!empty($estadoCuentaFiltro->pacientes)) {
-        $filter = $filter . ' and serv.cliente= ' . $estadoCuentaFiltro->pacientes[0]->idCliente;
+      if(!empty($estadocuentaFiltro->pacientes)) {
+        $filter = $filter . ' and serv.cliente= ' . $estadocuentaFiltro->pacientes[0]->idCliente;
       }
   }
 
