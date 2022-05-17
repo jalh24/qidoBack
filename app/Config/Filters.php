@@ -30,7 +30,7 @@ class Filters extends BaseConfig
 	 */
 	public $globals = [
 		'before' => [
-			'loginFilter'  => ['except' => ['login/*','mensajeWhatsapp/reciveMessage']]
+			'loginFilter'  => ['except' => ['login/*','mensajeWhatsapp/reciveMessage','cotizador/costoTurno','cotizador/gastoServicio','cotizador/datosServicio','cotizador/datosCotizador']]
 			// 'honeypot',
 			// 'csrf',
 		],

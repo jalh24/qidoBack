@@ -21,6 +21,11 @@ class ColaboradorModel extends Model
     return $query->getResult();
   }
 
+  public function getColaboradoresCompletos() { 
+    $query = $this->db->query('select correoElectronico, idColaborador from colaborador where correoElectronico is not null');
+    return $query->getResult();
+  } 
+
 public function insert_data($data = array())
   {
       $this->db->table($this->table)->insert($data);

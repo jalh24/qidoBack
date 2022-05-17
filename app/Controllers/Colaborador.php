@@ -303,6 +303,13 @@ class Colaborador extends BaseController
         return $this->respond($resp);
     }
 
+    public function colaboradores()
+	{
+		$colaboradorModel = new ColaboradorModel();	
+		$resp["data"]=$colaboradorModel->getColaboradoresCompletos();
+		return $this->respond($resp);
+	}
+
     // create
     public function create() {
         $colaboradorModel = new ColaboradorModel();
