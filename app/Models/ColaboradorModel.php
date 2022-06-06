@@ -276,6 +276,16 @@ public function insert_data($data = array())
     permanenciaColab.nombre permanenciaColab from ' . $this->table . ' colab '.
                               $filter . ' where colab.idColaborador =  '. $colaboradorFiltro);
     return $query->getResult();
+  }
+
+  public function getPacientesByColaborador($dato) { 
+    $query = $this->db->query('select *, CONCAT_WS(" ",servicio.nombre,servicio.a_paterno,servicio.a_materno) as nombrecompleto from colaboradorservicio inner join servicio on colaboradorservicio.idServicio = servicio.idServicio where colaboradorservicio.idColaborador = "'.$dato.'" and servicio.estatusOperativo = 2  order by colaboradorservicio.idServicio desc');
+    return $query->getResult();
+  } 
+
+  public function getColaboradorById($dato) { 
+    $query = $this->db->query('select * from cliente where idCliente = "'.$dato.'"');
+    return $query->getResult();
   } 
 
 }

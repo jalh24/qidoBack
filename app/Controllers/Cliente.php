@@ -194,5 +194,26 @@ class Cliente extends BaseController
 
         return $this->respond($resp);        
     }
+
+    public function clientesByContacto()
+	{
+		$clienteModel = new ClienteModel();
+		$resp["data"]=$clienteModel->getClientesByContacto($this->request->getVar('correoContacto'));
+		return $this->respond($resp);
+	}
+
+    public function colaboradoresByCliente()
+	{
+		$clienteModel = new ClienteModel();
+		$resp["data"]=$clienteModel->getColaboradoresByCliente($this->request->getVar('cliente'));
+		return $this->respond($resp);
+	}
+
+    public function bitacorasByServicio()
+	{
+		$clienteModel = new ClienteModel();
+		$resp["data"]=$clienteModel->getBitacorasByServicio($this->request->getVar('idServicio'));
+		return $this->respond($resp);
+	}
     
 }

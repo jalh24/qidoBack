@@ -632,4 +632,18 @@ class Colaborador extends BaseController
 		$resp["data"]=$zonaModel->getZonasColaborador($this->request->getVar('idColaborador'));
 		return $this->respond($resp);
 	}
+
+    public function pacientesByColaborador()
+	{
+		$colaboradorModel = new ColaboradorModel();
+		$resp["data"]=$colaboradorModel->getPacientesByColaborador($this->request->getVar('idColaborador'));
+		return $this->respond($resp);
+	}
+
+    public function colaboradorById()
+	{
+		$colaboradorModel = new ColaboradorModel();
+		$resp["data"]=$colaboradorModel->getColaboradorById($this->request->getVar('idCliente'));
+		return $this->respond($resp);
+	}
 }

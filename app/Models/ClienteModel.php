@@ -34,5 +34,20 @@ class ClienteModel extends Model
   public function getClienteId($clienteFiltro) {   
     $query = $this->db->query('select * from ' . $this->table . ' where idCliente =  '. $clienteFiltro);
     return $query->getResult();
-  } 
+  }
+
+  public function getClientesByContacto($dato) { 
+    $query = $this->db->query('select *,CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from cliente where correoContacto="'.$dato.'"');
+    return $query->getResult();
+  }
+
+  public function getColaboradoresByCliente($dato) { 
+    $query = $this->db->query('select s.idServicio, s.cliente, s.procedimientos, cs.idColaborador, CONCAT_WS(" ",c.nombre,c.a_paterno,c.a_materno) as nombrecompleto from servicio s inner join colaboradorservicio cs on s.idServicio=cs.idServicio inner join colaborador c on c.idColaborador=cs.idColaborador where s.cliente = ' .$dato. ' order by s.idServicio desc');
+    return $query->getResult();
+  }
+
+  public function getBitacorasByServicio($dato) { 
+    $query = $this->db->query('select * from bitacoraservicio where idServicio="'.$dato.'" order by fechaCaptura desc');
+    return $query->getResult();
+  }
 }
