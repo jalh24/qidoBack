@@ -20,6 +20,7 @@ class Bitacora extends BaseController
             'desayuno'  => $dataBitacora->desayunoBitacora,
             'comida'  => $dataBitacora->comidaBitacora,
             'cena'  => $dataBitacora->cenaBitacora,
+            'idEstadoAnimo' => $dataBitacora->estadoAnimoBitacora,
             'temperaturaCorporal' => $dataBitacora->temperaturaBitacora,
             'presionSistolica' => $dataBitacora->presionSistolicaBitacora,
             'presionDiastolica' => $dataBitacora->presionDiastolicaBitacora,
@@ -27,6 +28,7 @@ class Bitacora extends BaseController
             'saturacionOxigeno' => $dataBitacora->oxigenoBitacora,
             'idServicio' => $dataBitacora->idServicioBitacora,
             'idColaborador' => $dataBitacora->idColaboradorBitacora,
+            'actividad' => json_encode($dataBitacora->actividadesBitacora),
         ];
 
         //Se crea el colaborador y regresa el id para sus relaciones
@@ -60,6 +62,20 @@ class Bitacora extends BaseController
 	{
 		$bitacoraModel = new BitacoraModel();	
         $resp["data"]=$bitacoraModel->getEstadosAnimo();
+		return $this->respond($resp);
+	}
+
+    public function actividad()
+	{
+		$bitacoraModel = new BitacoraModel();	
+        $resp["data"]=$bitacoraModel->getActividades();
+		return $this->respond($resp);
+	}
+
+    public function lastBitacora()
+	{
+		$bitacoraModel = new BitacoraModel();
+		$resp["data"]=$bitacoraModel->getLastBitacora($this->request->getVar('idServicio'));
 		return $this->respond($resp);
 	}
 }

@@ -20,14 +20,34 @@ class UsuariofacturacionModel extends Model
       return $this->db->insertID();
   }
 
+  public function update_data($id, $data = array())
+  {
+      $this->db->table($this->table)->update($data, array(
+          "idUsuarioFacturacion" => $id,
+      ));
+      return $this->db->affectedRows();
+  }
+
   public function selectId($id)
   {
-    $query = $this->db->query('select idUsuarioFacturacion, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from ' . $this->table . ' where idUsuarioFacturacion =  '. $id);
+    $query = $this->db->query('select *, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from ' . $this->table . ' where idUsuarioFacturacion =  '. $id);
     return $query->getResult();
   }
 
   public function getUsuariosFacturacion() {
     $query = $this->db->query('select *, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from usuariofacturacion');
+    return $query->getResult();
+  }
+
+  public function getUsuariosFacturacionCorreo($correo)
+  {
+    $query = $this->db->query('select *, CONCAT_WS(" ",nombre,a_paterno,a_materno) as nombrecompleto from ' . $this->table . ' where correoElectronico = "' . $correo . '"');
+    return $query->getResult();
+  }
+
+  public function getValidacionCorreo($correo)
+  {
+    $query = $this->db->query('select exists (select 1 from ' . $this->table . ' usuariofacturacion where correoElectronico = "' . $correo . '") as validacionCorreo');
     return $query->getResult();
   }
 
