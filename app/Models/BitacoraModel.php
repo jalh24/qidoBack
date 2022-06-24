@@ -36,5 +36,9 @@ public function insert_data($data = array())
     $query = $this->db->query('select * from bitacoraservicio where idServicio = "'.$dato.'" order by fechaCaptura desc limit 1');
     return $query->getResult();
   }
+  public function getActividades() { 
+    $query = $this->db->query('select * from actividad');
+    return $query->getResult();
+  } 
 
 }
