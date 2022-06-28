@@ -73,12 +73,12 @@ class Bitacora extends BaseController
 		return $this->respond($resp);
 	}
 
-    public function actividad()
-	{
-		$bitacoraModel = new BitacoraModel();	
-        $resp["data"]=$bitacoraModel->getActividades();
-		return $this->respond($resp);
-	}
+    // public function actividad()
+	// {
+	// 	$bitacoraModel = new BitacoraModel();	
+    //     $resp["data"]=$bitacoraModel->getActividades();
+	// 	return $this->respond($resp);
+	// }
 
     public function lastBitacora()
 	{
