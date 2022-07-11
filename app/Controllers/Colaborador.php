@@ -6,6 +6,7 @@ use App\Models\ContactoColaboradorModel;
 use App\Models\CuentaColaboradorModel;
 use App\Models\ExperienciaModel;
 use App\Models\EstudioModel;
+use App\Models\HistorialServicioModel;
 use App\Models\ZonaModel;
 use App\Libraries\Twilio; // Import library
 use CodeIgniter\RESTful\ResourceController;
@@ -459,6 +460,20 @@ class Colaborador extends BaseController
             $estudioModel->insert_data($estudio);
         }
 
+         // Se guardan los historialServicios del colaborador
+         $historialServicioModel = new HistorialServicioModel();
+         $historialServiciosList = $dataColaborador->historialServicios;
+ 
+         foreach($historialServiciosList as $historialServicio1){            
+             $historialServicio = [
+                 'idColaborador'=>$colaborador,
+                 'fecha'  => date('Y-m-d',strtotime($historialServicio1->fecha)),
+                 'responsable'  => $historialServicio1->responsable,
+                 'observaciones'  => $historialServicio1->observaciones,
+             ];
+             $historialServicioModel->insert_data($historialServicio);
+         }
+
         // Se guardan las Zonas del colaborador
         $zonaModel = new ZonaModel();
         $zonasList = $dataColaborador->zonas;
@@ -563,6 +578,8 @@ class Colaborador extends BaseController
         ];
 
         $colaboradorModel->update_data($id, $data);
+
+
         $response = [
           'status'   => 200,
           'error'    => null,
@@ -595,17 +612,26 @@ class Colaborador extends BaseController
         $cuentaColaboradorModel = new CuentaColaboradorModel();
         $estudioModel = new EstudioModel();
         $experienciaModel = new ExperienciaModel();
+        $historialServicioModel = new HistorialServicioModel();
         $id = $this->request->getVar('idColaborador');
         $colaborador=$colaboradorModel->getColaboradorId($id);
         $colaborador["cuentas"] = $cuentaColaboradorModel->getContactosColaborador($id);
         $colaborador["estudios"] = $estudioModel->getEstudiosColaborador($id);
         $colaborador["experiencia"] = $experienciaModel->getExperienciasColaborador($id);
+        $colaborador["historialServicio"] = $historialServicioModel->getHistorialServiciosColaborador($id);
         // var_dump($colaborador[0]->habilidades);
         // $colaborador["habilidades"] = json_encode($colaborador[0]->habilidades);
         $resp["data"] = $colaborador;
 
         return $this->respond($resp);        
     }
+
+    public function historialServiciosColaborador()
+	{
+        $colaboradorModel = new ColaboradorModel();
+		$resp["data"]=$colaboradorModel->getHistorialServiciosColaborador($this->request->getVar('idColaborador'));
+		return $this->respond($resp);
+	}
 
     public function enviaMensaje(){
         $json = file_get_contents('php://input');
@@ -646,4 +672,45 @@ class Colaborador extends BaseController
 		$resp["data"]=$colaboradorModel->getColaboradorById($this->request->getVar('idCliente'));
 		return $this->respond($resp);
 	}
+
+    public function colaboradorByCorreo()
+	{
+		$colaboradorModel = new ColaboradorModel();
+		$resp["data"]=$colaboradorModel->getColaboradorByCorreo($this->request->getVar('correoElectronico'));
+		return $this->respond($resp);
+	}
+
+    public function createHistorialServicioExistente() {
+        $historialServicioModel = new HistorialServicioModel();
+        $json = file_get_contents('php://input');
+        $dataHistorialServicio = json_decode($json);
+        $data = [
+            'idColaborador'  => $dataHistorialServicio->idColaborador,
+            'fecha'  => $dataHistorialServicio->fecha,
+            'responsable'  => $dataHistorialServicio->responsable,
+            'observaciones'  => $dataHistorialServicio->observaciones,
+        ];
+
+        //Se crea el colaborador y regresa el id para sus relaciones
+        $historialServicio = $historialServicioModel->insert_data($data);
+
+        $response = [
+          'status'   => 201,
+          'error'    => null,
+          'messages' => [
+              'success' => 'Historial Servicio Agregado Exitosamente'
+          ]
+      ];
+      return $this->respondCreated($response);
+    }
+
+    public function borrarHistorialServicioExistente(){
+
+        $historialServicioModel = new HistorialServicioModel();
+        $json = file_get_contents('php://input');
+        $dataHistorialServicio = json_decode($json);
+        var_dump($dataHistorialServicio);
+
+        $historialServicioModel->deleteHistorialServiciosColaboradorExistente($dataHistorialServicio);     
+    }
 }

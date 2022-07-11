@@ -286,6 +286,16 @@ public function insert_data($data = array())
   public function getColaboradorById($dato) { 
     $query = $this->db->query('select * from cliente where idCliente = "'.$dato.'"');
     return $query->getResult();
+  }
+
+  public function getColaboradorByCorreo($dato) { 
+    $query = $this->db->query('select * from colaborador where correoElectronico = "'.$dato.'"');
+    return $query->getResult();
   } 
+
+  public function getHistorialServiciosColaborador($idColaborador) { 
+    $query = $this->db->query('select idHistorialServicio,idColaborador, fecha, responsable, observaciones from historialservicio where idColaborador ='.$idColaborador);
+    return $query->getResult();
+  }
 
 }

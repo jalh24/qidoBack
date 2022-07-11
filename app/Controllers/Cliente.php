@@ -583,4 +583,18 @@ class Cliente extends BaseController
 		$resp["data"]=$usuarioFacturacionModel->getValidacionCorreo($this->request->getVar('correoElectronico'));
 		return $this->respond($resp);
 	}
+
+    // public function usuariosFacturacionByCorreo($correo)
+	// {
+    //     $usuarioFacturacionModel = new UsuariofacturacionModel();
+    //     $resp["data"]=$usuarioFacturacionModel->getUsuariosFacturacionCorreo($correo);
+	// 	return $this->respond($resp);
+	// }
+
+    public function usuarioFacturacionByCorreo()
+	{
+		$usuarioFacturacionModel = new UsuariofacturacionModel();
+		$resp["data"]=$usuarioFacturacionModel->getUsuarioFacturacionByCorreo($this->request->getVar('correoElectronico'));
+		return $this->respond($resp);
+	}
 }

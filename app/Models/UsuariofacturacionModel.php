@@ -51,6 +51,11 @@ class UsuariofacturacionModel extends Model
     return $query->getResult();
   }
 
+  public function getUsuarioFacturacionByCorreo($dato) { 
+    $query = $this->db->query('select * from usuariofacturacion where correoElectronico = "'.$dato.'"');
+    return $query->getResult();
+  } 
+
 //   public function update_data($id, $data = array())
 //   {
 //       $this->db->table($this->table)->update($data, array(
