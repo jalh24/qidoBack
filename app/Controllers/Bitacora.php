@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 use App\Models\BitacoraModel;
+use App\Models\FotoBitacoraModel;
+use App\Models\FotoVacunaBitacoraModel;
+use App\Models\FotoMedicinaBitacoraModel;
 use App\Models\AsignacionColaboradorModel;
 use App\Libraries\Twilio; // Import library
 use CodeIgniter\RESTful\ResourceController;
@@ -33,6 +36,36 @@ class Bitacora extends BaseController
 
         //Se crea el colaborador y regresa el id para sus relaciones
         $idBitacora = $bitacoraModel->insert_data($data);
+
+        $fotoBitacoraModel = new FotoBitacoraModel();
+
+        $dataFoto = [
+            'idBitacora' => $idBitacora,
+            'foto'  => $dataBitacora->foto,
+            'fotoExt'  => $dataBitacora->fotoExt,
+        ];
+        
+        $idBitacoraFoto = $fotoBitacoraModel->insert_data($dataFoto);
+
+        $fotoVacunaBitacoraModel = new FotoVacunaBitacoraModel();
+
+        $dataFotoVacuna = [
+            'idBitacora' => $idBitacora,
+            'foto'  => $dataBitacora->fotoVacuna,
+            'fotoExt'  => $dataBitacora->fotoVacunaExt,
+        ];
+        
+        $idBitacoraVacunaFoto = $fotoVacunaBitacoraModel->insert_data($dataFotoVacuna);
+
+        $fotoMedicinaBitacoraModel = new FotoMedicinaBitacoraModel();
+
+        $dataFotoMedicina = [
+            'idBitacora' => $idBitacora,
+            'foto'  => $dataBitacora->fotoMedicina,
+            'fotoExt'  => $dataBitacora->fotoMedicinaExt,
+        ];
+        
+        $idBitacoraMedicinaFoto = $fotoMedicinaBitacoraModel->insert_data($dataFotoMedicina);
 
         // $asignacionColaboradorModel = new AsignacionColaboradorModel();
         // $asignacionColaboradorList = $dataBitacora->colaboradores;
@@ -84,6 +117,34 @@ class Bitacora extends BaseController
 	{
 		$bitacoraModel = new BitacoraModel();
 		$resp["data"]=$bitacoraModel->getLastBitacora($this->request->getVar('idServicio'));
+		return $this->respond($resp);
+	}
+
+    public function fcmByServicio()
+	{
+		$bitacoraModel = new BitacoraModel();
+		$resp["data"]=$bitacoraModel->getFcmByServicio($this->request->getVar('idServicio'));
+		return $this->respond($resp);
+	}
+
+    public function fotoGeneralByBitacoraId()
+	{
+		$fotoBitacoraModel = new FotoBitacoraModel();
+		$resp["data"]=$fotoBitacoraModel->getFotoGeneralByBitacoraId($this->request->getVar('idBitacora'));
+		return $this->respond($resp);
+	}
+
+    public function fotoVacunaByBitacoraId()
+	{
+		$fotoVacunaBitacoraModel = new FotoVacunaBitacoraModel();
+		$resp["data"]=$fotoVacunaBitacoraModel->getFotoVacunaByBitacoraId($this->request->getVar('idBitacora'));
+		return $this->respond($resp);
+	}
+
+    public function fotoMedicinaByBitacoraId()
+	{
+		$fotoMedicinaBitacoraModel = new FotoMedicinaBitacoraModel();
+		$resp["data"]=$fotoMedicinaBitacoraModel->getFotoMedicinaByBitacoraId($this->request->getVar('idBitacora'));
 		return $this->respond($resp);
 	}
 }

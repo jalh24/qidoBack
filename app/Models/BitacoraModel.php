@@ -37,4 +37,9 @@ public function insert_data($data = array())
     return $query->getResult();
   }
 
+  public function getFcmByServicio($dato) { 
+    $query = $this->db->query('select tokenDispositivos.tokenDispositivo from ((servicio inner join cliente on servicio.cliente=cliente.idCliente) inner join usuariofacturacion on cliente.idUsuarioFacturacion=usuariofacturacion.idUsuarioFacturacion inner join tokenDispositivos on usuariofacturacion.correoElectronico=tokenDispositivos.emailUsuario) where servicio.idServicio = "'.$dato.'"');
+    return $query->getResult();
+  }
+
 }

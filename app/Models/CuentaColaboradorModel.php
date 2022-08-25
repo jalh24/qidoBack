@@ -41,4 +41,23 @@ class CuentaColaboradorModel extends Model
     return $query->getResult();
   } 
 
+  public function getCuentasAntes($idColaborador) {
+    
+    $query = $this->db->query('select * from cuentacolaborador where idColaborador = ' . $idColaborador);
+
+    return $query->getResult();
+  }
+
+  public function eliminarCuentas($idColaborador,$colabServ) {
+
+    $query = $this->db->query('delete from cuentacolaborador where idColaborador=' . $idColaborador . ' and idCuenta=' . $colabServ->idCuenta);
+}
+
+public function agregarCuentas($idColaborador,$colabServ) {
+    // var_dump('insert into cuentacolaborador(idColaborador, idBanco, beneficiario, numero, tipoCuenta) VALUES ('. $idColaborador .', '. $colabServ->banco->idBanco .', '. $colabServ->nombre .', '. $colabServ->numero .', '. "'".$colabServ->tipoCuenta."'" .', '. $colabServ->comprobantePago .')');
+    // $colabServ->comprobantePago = base64_encode($colabServ->comprobantePago);
+  $query = $this->db->query('insert into cuentacolaborador(idColaborador, idBanco, beneficiario, numero, tipoCuenta, comprobantePago) VALUES ('. $idColaborador .', '. $colabServ->banco->idBanco .', '. "'".$colabServ->nombre."'" .', '. $colabServ->numero .', '. "'".$colabServ->tipoCuenta."'"  .', '. "'".$colabServ->comprobantePago."'" .')');
+//   'insert into cuentacolaborador(idColaborador, idBanco, beneficiario, numero, tipoCuenta) VALUES ('. $idColaborador .', '. $colabServ->idBanco .', '. $colabServ->beneficiario .', '. $colabServ->numero .', '. $colabServ->tipoCuenta .', '. $colabServ->comprobantePago .')'
+}
+
 }

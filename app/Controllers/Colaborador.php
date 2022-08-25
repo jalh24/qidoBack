@@ -579,6 +579,51 @@ class Colaborador extends BaseController
 
         $colaboradorModel->update_data($id, $data);
 
+        $cuentaColaboradorModel = new CuentaColaboradorModel();
+        $cuentasAntes = $cuentaColaboradorModel->getCuentasAntes($id);
+        // var_dump($dataColaborador->colaboradores);
+        // $asignacionColaboradorModel = new AsignacionColaboradorModel();
+        $cuentasColaboradorList = $dataColaborador->cuentasColaborador;
+        $cuentasBorrar = [];
+        $x = 0;
+        foreach($cuentasAntes as $cuentasAnt){ 
+            $existe = false;          
+            foreach($cuentasColaboradorList as $cuentasNuevos){
+                // var_dump($cuentasAnt);
+                if ($cuentasNuevos->idPago == $cuentasAnt->idCuenta) {
+                    $existe = true;
+                }
+            }
+            if(!$existe) {
+                $cuentasBorrar[$x] = $cuentasAnt;
+                $x++;
+            }
+        }
+
+        foreach($cuentasBorrar as $cuentaBorrar) {
+            $cuentaColaboradorModel->eliminarCuentas($id,$cuentaBorrar);
+        }  
+
+        $cuentasAntes = $cuentaColaboradorModel->getCuentasAntes($id);
+        $cuentasAgregar = [];
+        $y = 0;
+        foreach($dataColaborador->cuentasColaborador as $cuentasNuevos) {
+            $existe = false;
+            foreach($cuentasAntes as $cuentasAnt) {
+                if ($cuentasAnt->idCuenta == $cuentasNuevos->idPago) {
+                    $existe = true;
+                }
+            }
+            if(!$existe) {
+                $cuentasAgregar[$y] = $cuentasNuevos;
+                $y++;
+            }
+        }
+
+        foreach($cuentasAgregar as $cuantaAgregar){
+            // var_dump($cuantaAgregar);
+            $cuentaColaboradorModel->agregarCuentas($id,$cuantaAgregar);
+        }
 
         $response = [
           'status'   => 200,
