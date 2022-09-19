@@ -42,4 +42,9 @@ public function insert_data($data = array())
     return $query->getResult();
   }
 
+  public function getBitacoraById($dato) { 
+    $query = $this->db->query('select * from bitacoraservicio where idBitacora = "'.$dato.'"');
+    return $query->getResult();
+  }
+
 }

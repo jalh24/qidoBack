@@ -82,10 +82,12 @@ class Bitacora extends BaseController
         // }
 
         $response = [
+            
           'status'   => 201,
           'error'    => null,
           'messages' => [
-              'success' => 'Bitacora creado exitosamente'
+              'success' => 'Bitacora creado exitosamente',
+              'lastId' => $idBitacora
           ]
       ];
       return $this->respondCreated($response);
@@ -145,6 +147,13 @@ class Bitacora extends BaseController
 	{
 		$fotoMedicinaBitacoraModel = new FotoMedicinaBitacoraModel();
 		$resp["data"]=$fotoMedicinaBitacoraModel->getFotoMedicinaByBitacoraId($this->request->getVar('idBitacora'));
+		return $this->respond($resp);
+	}
+
+    public function bitacoraById()
+	{
+		$bitacoraModel = new BitacoraModel();
+		$resp["data"]=$bitacoraModel->getBitacoraById($this->request->getVar('idBitacora'));
 		return $this->respond($resp);
 	}
 }
