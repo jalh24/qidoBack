@@ -6,6 +6,7 @@ use App\Models\FotoBitacoraModel;
 use App\Models\FotoVacunaBitacoraModel;
 use App\Models\FotoMedicinaBitacoraModel;
 use App\Models\AsignacionColaboradorModel;
+use App\Models\NotificacionBitacoraTokenDispositivoModel;
 use App\Libraries\Twilio; // Import library
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
@@ -93,6 +94,28 @@ class Bitacora extends BaseController
       return $this->respondCreated($response);
     }
 
+
+    public function notificacionBitacoraTokenDispositivo() {
+        $notificacionBitacoraTokenDispositivoModel = new NotificacionBitacoraTokenDispositivoModel();
+        $json = file_get_contents('php://input');
+        $dataNotificacionBitacoraTokenDispositivo = json_decode($json);
+        $data = [
+            'idBitacora'  => $dataNotificacionBitacoraTokenDispositivo->idBitacora,
+            'tokenDispositivo'  => $dataNotificacionBitacoraTokenDispositivo->tokenDispositivo,
+        ];
+
+        $idNotificacionBitacoraTokenDispositivo = $notificacionBitacoraTokenDispositivoModel->insert_data($data);
+
+        $response = [        
+          'status'   => 201,
+          'error'    => null,
+          'messages' => [
+              'success' => 'Relación Bitacora Token Dispositivo creado exitosamente'
+          ]
+      ];
+      return $this->respondCreated($response);
+    }
+
     public function estadosAnimo()
 	{
 		$bitacoraModel = new BitacoraModel();	
@@ -154,6 +177,13 @@ class Bitacora extends BaseController
 	{
 		$bitacoraModel = new BitacoraModel();
 		$resp["data"]=$bitacoraModel->getBitacoraById($this->request->getVar('idBitacora'));
+		return $this->respond($resp);
+	}
+
+    public function bitacorasTokenDispositivo()
+	{
+		$notificacionBitacoraTokenDispositivoModel = new NotificacionBitacoraTokenDispositivoModel();	
+		$resp["data"]=$notificacionBitacoraTokenDispositivoModel->getBitacorasTokenDispositivo($this->request->getVar('tokenDispositivo'));
 		return $this->respond($resp);
 	}
 }
