@@ -186,4 +186,25 @@ class Bitacora extends BaseController
 		$resp["data"]=$notificacionBitacoraTokenDispositivoModel->getBitacorasTokenDispositivo($this->request->getVar('tokenDispositivo'));
 		return $this->respond($resp);
 	}
+
+    public function countNotificaciones()
+	{
+		$notificacionBitacoraTokenDispositivoModel = new NotificacionBitacoraTokenDispositivoModel();	
+		$resp["data"]=$notificacionBitacoraTokenDispositivoModel->getCountNotificaciones($this->request->getVar('tokenDispositivo'));
+		return $this->respond($resp);
+	}
+
+    public function bitacorasTokenDispositivoByCliente()
+	{
+		$notificacionBitacoraTokenDispositivoModel = new NotificacionBitacoraTokenDispositivoModel();	
+		$resp["data"]=$notificacionBitacoraTokenDispositivoModel->getBitacorasTokenDispositivoByCliente($this->request->getVar('tokenDispositivo'),$this->request->getVar('cliente'));
+		return $this->respond($resp);
+	}
+
+    public function deleteNotificacionBitacora()
+	{
+		$notificacionBitacoraTokenDispositivoModel = new NotificacionBitacoraTokenDispositivoModel();	
+		$resp["data"]=$notificacionBitacoraTokenDispositivoModel->getDeleteNotificacionBitacora($this->request->getVar('tokenDispositivo'),$this->request->getVar('idBitacora'));
+		return $this->respond($resp);
+	}
 }
