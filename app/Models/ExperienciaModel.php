@@ -40,4 +40,21 @@ class ExperienciaModel extends Model
     return $query->getResult();
   } 
 
+//   public function getExperienciasAntes($idColaborador) {
+    
+//     $query = $this->db->query('select * from cuentacolaborador where idColaborador = ' . $idColaborador);
+
+//     return $query->getResult();
+//   }
+
+  public function eliminarExperiencias($idColaborador,$colabServ) {
+
+    $query = $this->db->query('delete from ' . $this->table . ' where idColaborador=' . $idColaborador . ' and idExperiencia=' . $colabServ->idExperiencia);
+}
+
+public function agregarExperiencias($idColaborador,$colabServ) {
+    // var_dump('insert into experiencia(idColaborador, empresa, fechaInicio, fechaFin, referencia, comentario, telefono) VALUES ('. $idColaborador .', '. '"'.$colabServ->empresa .'"'.', '. '"'.$colabServ->fechaInicio .'"'.', '. '"'.$colabServ->fechaFin .'"'.', '. '"'.$colabServ->referencia.'"'. ', '. '"'.$colabServ->comentario .'"'.', '. '"'.$colabServ->telefono.'"'.')');
+  $query = $this->db->query('insert into experiencia(idColaborador, empresa, fechaInicio, fechaFin, referencia, comentario, telefono) VALUES ('. $idColaborador .', '. '"'.$colabServ->empresa .'"'.', '. '"'.$colabServ->fechaInicio .'"'.', '. '"'.$colabServ->fechaFin .'"'.', '. '"'.$colabServ->referencia.'"'. ', '. '"'.$colabServ->comentario .'"'.', '. '"'.$colabServ->telefono.'"'.')');
+}
+
 }

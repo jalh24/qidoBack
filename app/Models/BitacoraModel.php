@@ -47,4 +47,10 @@ public function insert_data($data = array())
     return $query->getResult();
   }
 
+  public function getBitacoraId($bitacoraFiltro) { 
+
+    $query = $this->db->query('select CONCAT_WS(" ",c.nombre,c.a_paterno,c.a_materno) as nombrecompleto, b.* from ' . $this->table . ' as b inner join colaborador as c on b.idColaborador = c.idColaborador where idServicio = '. $bitacoraFiltro);
+    return $query->getResult();
+  }
+
 }

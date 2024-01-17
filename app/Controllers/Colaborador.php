@@ -316,6 +316,7 @@ class Colaborador extends BaseController
         $colaboradorModel = new ColaboradorModel();
         $json = file_get_contents('php://input');
         $dataColaborador = json_decode($json);
+        // var_dump($dataColaborador);
         $data = [
             'nombre'  => $dataColaborador->nombre,
             'a_paterno'  => $dataColaborador->a_paterno,
@@ -388,6 +389,8 @@ class Colaborador extends BaseController
             'horario'  => json_encode($dataColaborador->horario),
             'habilidades'  => json_encode($dataColaborador->habilidades),
             'especialidades'  => json_encode($dataColaborador->especialidades),
+            'cvFile'  => $dataColaborador->cvFile,
+            'cvNombre'  => $dataColaborador->cvNombre,
             'fechaCreacion' =>date('Y-m-d H:m:s')
         ];
 
@@ -502,6 +505,7 @@ class Colaborador extends BaseController
         $id = $this->request->getVar('idColaborador');
         $json = file_get_contents('php://input');
         $dataColaborador = json_decode($json);
+        // var_dump($dataColaborador);
         $data = [
             'nombre'  => $dataColaborador->nombre,
             'a_paterno'  => $dataColaborador->a_paterno,
@@ -574,6 +578,8 @@ class Colaborador extends BaseController
             'horario'  => json_encode($dataColaborador->horario),
             'habilidades'  => json_encode($dataColaborador->habilidades),
             'especialidades'  => json_encode($dataColaborador->especialidades),
+            'cvFile'  => $dataColaborador->cvFile,
+            'cvNombre'  => $dataColaborador->cvNombre,
             'fechaCreacion' =>date('Y-m-d H:m:s')
         ];
 
@@ -623,6 +629,59 @@ class Colaborador extends BaseController
         foreach($cuentasAgregar as $cuantaAgregar){
             // var_dump($cuantaAgregar);
             $cuentaColaboradorModel->agregarCuentas($id,$cuantaAgregar);
+        }
+
+        ////////
+
+        $experienciaModel = new ExperienciaModel();
+        $experienciasAntes = $experienciaModel->getExperienciasColaborador($id);
+
+        $experienciasColaboradorList = $dataColaborador->experiencias;
+        $experienciasBorrar = [];
+        $x = 0;
+        foreach($experienciasAntes as $experienciasAnt){ 
+            $existe = false;          
+            foreach($experienciasColaboradorList as $experienciasNuevos){
+                if ($experienciasNuevos->idExperiencia == $experienciasAnt->idExperiencia) {
+                    $existe = true;
+                }
+            }
+            if(!$existe) {
+                $experienciasBorrar[$x] = $experienciasAnt;
+                $x++;
+            }
+        }
+
+        foreach($experienciasBorrar as $experienciaBorrar) {
+            $experienciaModel->eliminarExperiencias($id,$experienciaBorrar);
+        }  
+
+        $experienciasAntes = $experienciaModel->getExperienciasColaborador($id);
+        $experienciasAgregar = [];
+        $y = 0;
+        foreach($dataColaborador->experiencias as $experienciasNuevos) {
+            $existe = false;
+            foreach($experienciasAntes as $experienciasAnt) {
+                if ($experienciasAnt->idExperiencia == $experienciasNuevos->idExperiencia) {
+                    $existe = true;
+                }
+            }
+            if(!$existe) {
+                $experienciasAgregar[$y] = $experienciasNuevos;
+                $y++;
+            }
+        }
+
+        foreach($experienciasAgregar as $experienciaAgregar){ //AGREGAR AQUI
+            if($experienciaAgregar->fechaInicio != NULL){
+                $experienciaAgregar->fechaInicio = date('Y-m-d',strtotime($experienciaAgregar->fechaInicio));
+            }
+            if($experienciaAgregar->fechaFin != NULL){
+                $experienciaAgregar->fechaFin = date('Y-m-d',strtotime($experienciaAgregar->fechaFin));
+            }
+            
+            // var_dump($experienciaAgregar);
+            $experienciaModel->agregarExperiencias($id,$experienciaAgregar);
         }
 
         $response = [
